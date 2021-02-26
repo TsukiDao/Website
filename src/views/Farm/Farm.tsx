@@ -17,7 +17,10 @@ import Split from 'components/Split'
 import useFarming from 'hooks/useFarming'
 
 import HarvestCard from './components/Harvest'
+import HarvestCard2 from './components/HarvestPool2'
 import StakeCard from './components/Stake'
+import StakeCard2 from './components/StakePool2'
+import logo from './components/Harvest/Tsuki_Farm_small.png'
 
 
 const Farm: React.FC = () => {
@@ -61,7 +64,7 @@ const Farm: React.FC = () => {
   return (
     <Page>
       <PageHeader
-        icon="🌙"
+        icon= {<img src={logo} /> }
         subtitle="Stake TSUKI/BNB LP tokens and grow BNB CASH"
         title="Farm"
       />
@@ -71,8 +74,8 @@ const Farm: React.FC = () => {
           <HarvestCard />
         </Split>
         <Split>
-        <StakeCard />
-        <HarvestCard />
+        <StakeCard2 />
+        <HarvestCard2 />
         </Split>
         <Spacer />
         <Box row justifyContent="center">

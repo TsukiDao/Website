@@ -178,14 +178,14 @@ const Stake: React.FC = () => {
   return (
     <>
       <Card>
-        <CardIcon>🌙</CardIcon>
+        <CardIcon>🌓</CardIcon>
         <CardContent>
           <Box
             alignItems="center"
             column
           >
             <Value value={formattedStakedBalance} />
-            <Label text="Staked LP TSUKI/BNB Tokens" />
+            <Label text="Staked LP BNBC/BNB Tokens" />
           </Box>
         </CardContent>
         <CardActions>
