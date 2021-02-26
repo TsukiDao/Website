@@ -52,7 +52,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
           onSelectMax={handleSelectMax}
           onChange={handleChange}
           max={fullBalance}
-          symbol="YYCRV_UNI_LP"
+          symbol="TSUKI_CAKE_LP"
         />
       </ModalContent>
       <ModalActions>

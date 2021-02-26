@@ -22,6 +22,7 @@ import Split from 'components/Split'
 
 import useBalances from 'hooks/useBalances'
 import useVesting from 'hooks/useVesting'
+import logo from './icon_3.png'
 
 const WalletModal: React.FC<ModalProps> = ({
   isOpen,
@@ -55,41 +56,13 @@ const WalletModal: React.FC<ModalProps> = ({
     <Modal isOpen={isOpen}>
       <ModalTitle text="My Wallet" />
       <ModalContent>
-        <Split>
           <Box row>
             <FancyValue
-              icon="🍠"
-              label="YAM balance"
+              icon= {<img src={logo} />}
+              label="Tsuki balance"
               value={getDisplayBalance(yamV3Balance)}
             />
           </Box>
-          <Box row>
-            <FancyValue
-              icon={<span role="img" style={{ opacity: 0.5 }} >🍠</span>}
-              label="YAMV2 balance"
-              value={getDisplayBalance(yamV2Balance)}
-            />
-          </Box>
-        </Split>
-        <Spacer />
-        <Separator />
-        <Spacer />
-        <Split>
-          <Box row>
-            <FancyValue
-              icon="🎁"
-              label="Vested YAM (Delegator)"
-              value={getDisplayBalance(vestedDelegatorRewardBalance)}
-            />
-          </Box>
-          <Box row>
-            <FancyValue
-              icon="🦋"
-              label="Vested YAM (Migrated)"
-              value={getDisplayBalance(vestedMigratedBalance)}
-            />
-          </Box>
-        </Split>
         <Spacer />
       </ModalContent>
       <Separator />
