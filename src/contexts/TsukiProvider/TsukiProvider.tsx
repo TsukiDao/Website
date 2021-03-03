@@ -2,31 +2,31 @@ import React, { createContext, useEffect, useState } from 'react'
 
 import { useWallet } from 'use-wallet'
 
-import { Yam } from 'yam-sdk/lib'
+import { Tsuki } from 'tsuki-sdk/lib'
 
-export interface YamContext {
-  yam?: any
+export interface TsukiContext {
+  tsuki?: any
 }
 
-export const Context = createContext<YamContext>({
-  yam: undefined,
+export const Context = createContext<TsukiContext>({
+  tsuki: undefined,
 })
 
 declare global {
   interface Window {
-    yamsauce: any
+    tsukisauce: any
   }
 }
 
-const YamProvider: React.FC = ({ children }) => {
+const TsukiProvider: React.FC = ({ children }) => {
   const { ethereum } = useWallet()
-  const [yam, setYam] = useState<any>()
+  const [tsuki, setTsuki] = useState<any>()
 
   useEffect(() => {
     if (ethereum) {
-      const yamLib = new Yam(
+      const TsukiLib = new Tsuki(
         ethereum,
-        "1",
+        "56",
         false, {
           defaultAccount: "",
           defaultConfirmations: 1,
@@ -39,16 +39,16 @@ const YamProvider: React.FC = ({ children }) => {
         }
       )
 
-      setYam(yamLib)
-      window.yamsauce = yamLib
+      setTsuki(tsukiLib)
+      window.tsukisauce = tsukiLib
     }
   }, [ethereum])
 
   return (
-    <Context.Provider value={{ yam }}>
+    <Context.Provider value={{ tsuki }}>
       {children}
     </Context.Provider>
   )
 }
 
-export default YamProvider
+export default TsukiProvider

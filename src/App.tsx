@@ -12,9 +12,8 @@ import TopBar from 'components/TopBar'
 
 import { BalancesProvider } from 'contexts/Balances'
 import { FarmingProvider } from 'contexts/Farming'
-import { MigrationProvider } from 'contexts/Migration'
 import { VestingProvider } from 'contexts/Vesting'
-import YamProvider from 'contexts/YamProvider'
+import TsukiProvider from 'contexts/TsukiProvider'
 
 import Farm from 'views/Farm'
 import FAQ from 'views/FAQ'
@@ -69,17 +68,15 @@ const Providers: React.FC = ({ children }) => {
           walletconnect: { rpcUrl: 'https://mainnet.eth.aragon.network/' },
         }}
       >
-        <YamProvider>
+        <TsukiProvider>
           <BalancesProvider>
             <FarmingProvider>
-              <MigrationProvider>
                 <VestingProvider>
                   {children}
                 </VestingProvider>
-              </MigrationProvider>
             </FarmingProvider>
           </BalancesProvider>
-        </YamProvider>
+        </TsukiProvider>
       </UseWalletProvider>
     </ThemeProvider>
   )

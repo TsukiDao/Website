@@ -14,10 +14,10 @@ import { getBalance } from 'utils'
 import Context from './Context'
 
 const Provider: React.FC = ({ children }) => {
-  const [tsukiBalance, setTsuskiBalance] = useState<BigNumber>()
-  const [bnbcBalance, setBnbcBalance = useState<BigNumber>()
-  const [bnbcbnbCakeLpBalance, setBnbcBnbCakeLpBalance] = useState<BigNumber>()
-  const [TsukiBnbCakeLpBalance, setTsukiBnbCakeLpBalance] = useState<BigNumber>()
+  const [tsukiBalance, setTsukiBalance] = useState<BigNumber>()
+  const [bnbcBalance, setBnbcBalance] = useState<BigNumber>()
+  const [tsukibnbCakeLpBalance, setTsukibnbCakeLpBalance] = useState<BigNumber>()
+  const [bnbbnbCakeLpBalance, setBnbcbnbCakeLpBalance] = useState<BigNumber>()
 
   const { account, ethereum }: { account: string | null, ethereum: provider } = useWallet()
 
@@ -28,21 +28,21 @@ const Provider: React.FC = ({ children }) => {
       await getBalance(provider, bnbcbnbCakeLpAddress, userAddress),
       await getBalance(provider, tsukibnbCakeLpAddress, userAddress)
     ])
-    setTsukiBalance(new BigNumber(balances[0]).dividedBy(new BigNumber(10).pow(24)))
+    setTsukiBalance(new BigNumber(balances[0]).dividedBy(new BigNumber(10).pow(18)))
     setBnbcBalance(new BigNumber(balances[1]).dividedBy(new BigNumber(10).pow(18)))
-    setTsukiBnbCakeLpBalance(new BigNumber(balances[2]).dividedBy(new BigNumber(10).pow(18)))
-    setBnbcBnbCakeLpBalance(new BigNumber(balances[2]).dividedBy(new BigNumber(10).pow(18)))
+    setTsukibnbCakeLpBalance(new BigNumber(balances[2]).dividedBy(new BigNumber(10).pow(18)))
+    setBnbcbnbCakeLpBalance(new BigNumber(balances[3]).dividedBy(new BigNumber(10).pow(18)))
   }, [
     setTsukiBalance,
     setBnbcBalance,
-    setTsukiBnbCakeLpBalance,
-    setBnbcBnbCkeLpBalance
+    setTsukibnbCakeLpBalance,
+    setBnbcbnbCakeLpBalance
   ])
 
   useEffect(() => {
     if (account && ethereum) {
       fetchBalances(account, ethereum)
-    }S
+    }
   }, [
     account,
     ethereum,
@@ -63,10 +63,10 @@ const Provider: React.FC = ({ children }) => {
 
   return (
     <Context.Provider value={{
-      TsuskiBalance,
-      BnbcBalance,
-      TsukiBnbCakeLpBalance,
-      BnbcBnbCakeLpBalance,
+      tsukiBalance,
+      bnbcBalance,
+      tsukibnbCakeLpBalance,
+      bnbbnbCakeLpBalance
     }}>
       {children}
     </Context.Provider>
