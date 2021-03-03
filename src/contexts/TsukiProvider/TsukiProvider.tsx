@@ -39,8 +39,8 @@ const TsukiProvider: React.FC = ({ children }) => {
         }
       )
 
-      setTsuki(tsukiLib)
-      window.tsukisauce = tsukiLib
+      setTsuki(TsukiLib)
+      window.tsukisauce = TsukiLib
     }
   }, [ethereum])
 

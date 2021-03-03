@@ -37,7 +37,7 @@ const Stats: React.FC = () => {
     return () => clearInterval(refreshInterval)
   }, [
     fetchStats,
-    yam
+    tsuki
   ])
   return (
     <Box column>

@@ -30,8 +30,7 @@ const WalletModal: React.FC<ModalProps> = ({
 
   const { reset } = useWallet()
   const {
-    yamV2Balance,
-    yamV3Balance
+    tsukiBalance,
   } = useBalances()
 
 
@@ -55,7 +54,7 @@ const WalletModal: React.FC<ModalProps> = ({
             <FancyValue
               icon= {<img src={logo} />}
               label="Tsuki balance"
-              value={getDisplayBalance(yamV3Balance)}
+              value={getDisplayBalance(tsukiBalance)}
             />
           </Box>
         <Spacer />

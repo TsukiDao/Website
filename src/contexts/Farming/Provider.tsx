@@ -32,34 +32,34 @@ const Provider: React.FC = ({ children }) => {
   const [earnedBalance, setEarnedBalance] = useState<BigNumber>()
   const [stakedBalance, setStakedBalance] = useState<BigNumber>()
 
-  const yam = useYam()
+  const tsuki = useTsuki()
   const { account } = useWallet()
   
-  const yycrvPoolAddress = yam ? yam.contracts.yycrv_pool.options.address : ''
+  const tsukibnbCakeLPAddress = tsuki ? tsuki.contracts.yycrv_pool.options.address : ''
   const { isApproved, isApproving, onApprove } = useApproval(
     tsukibnbCakeLPAddress,
-    yycrvPoolAddress,
+    tsukibnbCakeLPAddress,
     () => setConfirmTxModalIsOpen(false)
   )
 
   const fetchEarnedBalance = useCallback(async () => {
-    if (!account || !yam) return
-    const balance = await getEarned(yam, yam.contracts.yycrv_pool, account)
+    if (!account || !tsuki) return
+    const balance = await getEarned(tsuki, tsuki.contracts.yycrv_pool, account)
     setEarnedBalance(balance)
   }, [
     account,
     setEarnedBalance,
-    yam
+    tsuki
   ])
 
   const fetchStakedBalance = useCallback(async () => {
-    if (!account || !yam) return
-    const balance = await getStaked(yam, yam.contracts.yycrv_pool, account)
+    if (!account || !tsuki) return
+    const balance = await getStaked(tsuki, tsuki.contracts.yycrv_pool, account)
     setStakedBalance(balance)
   }, [
     account,
     setStakedBalance,
-    yam
+    tsuki
   ])
 
   const fetchBalances = useCallback(async () => {
@@ -79,9 +79,9 @@ const Provider: React.FC = ({ children }) => {
   ])
 
   const handleHarvest = useCallback(async () => {
-    if (!yam) return
+    if (!tsuki) return
     setConfirmTxModalIsOpen(true)
-    await harvest(yam, account, () => {
+    await harvest(tsuki, account, () => {
       setConfirmTxModalIsOpen(false)
       setIsHarvesting(true)
     })
@@ -90,13 +90,13 @@ const Provider: React.FC = ({ children }) => {
     account,
     setConfirmTxModalIsOpen,
     setIsHarvesting,
-    yam
+    tsuki
   ])
 
   const handleRedeem = useCallback(async () => {
-    if (!yam) return
+    if (!tsuki) return
     setConfirmTxModalIsOpen(true)
-    await redeem(yam, account, () => {
+    await redeem(tsuki, account, () => {
       setConfirmTxModalIsOpen(false)
       setIsRedeeming(true)
     })
@@ -105,13 +105,13 @@ const Provider: React.FC = ({ children }) => {
     account,
     setConfirmTxModalIsOpen,
     setIsRedeeming,
-    yam
+    tsuki
   ])
 
   const handleStake = useCallback(async (amount: string) => {
-    if (!yam) return
+    if (!tsuki) return
     setConfirmTxModalIsOpen(true)
-    await stake(yam, amount, account, () => {
+    await stake(tsuki, amount, account, () => {
       setConfirmTxModalIsOpen(false)
       setIsStaking(true)
     })
@@ -120,13 +120,13 @@ const Provider: React.FC = ({ children }) => {
     account,
     setConfirmTxModalIsOpen,
     setIsStaking,
-    yam
+    tsuki
   ])
 
   const handleUnstake = useCallback(async (amount: string) => {
-    if (!yam) return
+    if (!tsuki) return
     setConfirmTxModalIsOpen(true)
-    await unstake(yam, amount, account, () => {
+    await unstake(tsuki, amount, account, () => {
       setConfirmTxModalIsOpen(false)
       setIsUnstaking(true)
     })
@@ -135,7 +135,7 @@ const Provider: React.FC = ({ children }) => {
     account,
     setConfirmTxModalIsOpen,
     setIsUnstaking,
-    yam
+    tsuki
   ])
 
   useEffect(() => {

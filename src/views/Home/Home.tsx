@@ -17,7 +17,7 @@ import logo from './components/icon_2.png'
 
 const Home: React.FC = () => {
   const { darkMode } = useTheme()
-  const { TsukiBalance } = useBalances()
+  const { tsukiBalance, bnbcBalance } = useBalances()
   return (
     <Page>
       <PageHeader
@@ -26,7 +26,7 @@ const Home: React.FC = () => {
         title="Welcome to Tsuki Finance."
       />
       <Container>
-        {(TsukiBalance && BnbcBalance.toNumber() > 0) && (
+        {(tsukiBalance && bnbcBalance) && (
           <>
             <Spacer />
           </>
