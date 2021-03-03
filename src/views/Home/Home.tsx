@@ -10,7 +10,6 @@ import PageHeader from 'components/PageHeader'
 import Split from 'components/Split'
 
 import useBalances from 'hooks/useBalances'
-import useVesting from 'hooks/useVesting'
 
 import MigrationNotice from './components/MigrationNotice'
 import Rebase from './components/Rebase'
@@ -21,7 +20,6 @@ import logo from './components/icon_2.png'
 const Home: React.FC = () => {
   const { darkMode } = useTheme()
   const { yamV2Balance } = useBalances()
-  const { vestedBalance } = useVesting()
   return (
     <Page>
       <PageHeader

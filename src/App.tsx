@@ -12,7 +12,6 @@ import TopBar from 'components/TopBar'
 
 import { BalancesProvider } from 'contexts/Balances'
 import { FarmingProvider } from 'contexts/Farming'
-import { VestingProvider } from 'contexts/Vesting'
 import TsukiProvider from 'contexts/TsukiProvider'
 
 import Farm from 'views/Farm'
@@ -71,9 +70,6 @@ const Providers: React.FC = ({ children }) => {
         <TsukiProvider>
           <BalancesProvider>
             <FarmingProvider>
-                <VestingProvider>
-                  {children}
-                </VestingProvider>
             </FarmingProvider>
           </BalancesProvider>
         </TsukiProvider>

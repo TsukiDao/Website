@@ -9,17 +9,17 @@ import {
 } from 'react-neu'
 
 import FancyValue from 'components/FancyValue'
-import useYam from 'hooks/useYam'
+import useTsuki from 'hooks/useTsuki'
 import { bnToDec } from 'utils'
 import {
   getCurrentPrice,
   getScalingFactor,
-} from 'yam-sdk/utils'
+} from 'tsuki-sdk/utils'
 
 const Stats: React.FC = () => {
   const [currentPrice, setCurrentPrice] = useState<string>()
   const [scalingFactor, setScalingFactor] = useState<string>()
-  const yam = useYam()
+  const tsuki = useTsuki()
   const fetchStats = useCallback(async () => {
     if (!yam) return
     const price = await getCurrentPrice(yam)
@@ -29,7 +29,7 @@ const Stats: React.FC = () => {
   }, [
     setCurrentPrice,
     setScalingFactor,
-    yam,
+    tsuki,
   ])
   useEffect(() => {
     fetchStats()

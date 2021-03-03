@@ -1,9 +1,9 @@
 import { useContext } from 'react'
-import { Context } from '../contexts/YamProvider'
+import { Context } from '../contexts/TsukiProvider'
 
-const useYam = () => {
-  const { yam } = useContext(Context)
-  return yam
+const useTsuki = () => {
+  const { tsuki } = useContext(Context)
+  return tsuki
 }
 
-export default useYam
+export default useTsuki

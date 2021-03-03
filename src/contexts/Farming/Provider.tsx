@@ -6,7 +6,7 @@ import { useWallet } from 'use-wallet'
 import ConfirmTransactionModal from 'components/ConfirmTransactionModal'
 import { tsukibnbCakeLP as tsukibnbCakeLPAddress } from 'constants/tokenAddresses'
 import useApproval from 'hooks/useApproval'
-import useYam from 'hooks/useYam'
+import useTsuki from 'hooks/useTsuki'
 
 import {
   getEarned,
@@ -15,7 +15,7 @@ import {
   redeem,
   stake,
   unstake,
-} from 'yam-sdk/utils'
+} from 'tsuki-sdk/utils'
 
 import Context from './Context'
 

@@ -21,7 +21,6 @@ import FancyValue from 'components/FancyValue'
 import Split from 'components/Split'
 
 import useBalances from 'hooks/useBalances'
-import useVesting from 'hooks/useVesting'
 import logo from './icon_3.png'
 
 const WalletModal: React.FC<ModalProps> = ({
@@ -35,10 +34,6 @@ const WalletModal: React.FC<ModalProps> = ({
     yamV3Balance
   } = useBalances()
 
-  const {
-    vestedDelegatorRewardBalance,
-    vestedMigratedBalance,
-  } = useVesting()
 
   const getDisplayBalance = useCallback((value?: BigNumber) => {
     if (value) {

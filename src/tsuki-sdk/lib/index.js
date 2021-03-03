@@ -6,7 +6,7 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 });
 
-export { Yam } from './Yam.js';
+export { Tsuki } from './Tsuki.js';
 export {
   Web3,
   BigNumber,
