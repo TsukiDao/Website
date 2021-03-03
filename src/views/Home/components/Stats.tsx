@@ -21,9 +21,9 @@ const Stats: React.FC = () => {
   const [scalingFactor, setScalingFactor] = useState<string>()
   const tsuki = useTsuki()
   const fetchStats = useCallback(async () => {
-    if (!yam) return
-    const price = await getCurrentPrice(yam)
-    const factor = await getScalingFactor(yam)
+    if (!tsuki) return
+    const price = await getCurrentPrice(tsuki)
+    const factor = await getScalingFactor(tsuki)
     setCurrentPrice(numeral(bnToDec(price)).format('0.00a'))
     setScalingFactor(numeral(bnToDec(factor)).format('0.00a'))
   }, [

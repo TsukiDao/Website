@@ -11,15 +11,13 @@ import Split from 'components/Split'
 
 import useBalances from 'hooks/useBalances'
 
-import MigrationNotice from './components/MigrationNotice'
 import Rebase from './components/Rebase'
 import Stats from './components/Stats'
-import VestingNotice from './components/VestingNotice'
 import logo from './components/icon_2.png'
 
 const Home: React.FC = () => {
   const { darkMode } = useTheme()
-  const { yamV2Balance } = useBalances()
+  const { TsukiBalance } = useBalances()
   return (
     <Page>
       <PageHeader
@@ -28,15 +26,8 @@ const Home: React.FC = () => {
         title="Welcome to Tsuki Finance."
       />
       <Container>
-        {(yamV2Balance && yamV2Balance.toNumber() > 0) && (
+        {(TsukiBalance && BnbcBalance.toNumber() > 0) && (
           <>
-            <MigrationNotice />
-            <Spacer />
-          </>
-        )}
-        {(vestedBalance && vestedBalance.toNumber() > 0) && (
-          <>
-            <VestingNotice />
             <Spacer />
           </>
         )}
