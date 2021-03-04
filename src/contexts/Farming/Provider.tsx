@@ -4,7 +4,6 @@ import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
 import ConfirmTransactionModal from 'components/ConfirmTransactionModal'
-import { tsukibnbCakeLP as tsukibnbCakeLPAddress } from 'constants/tokenAddresses'
 import useApproval from 'hooks/useApproval'
 import useTsuki from 'hooks/useTsuki'
 
@@ -35,7 +34,7 @@ const Provider: React.FC = ({ children }) => {
   const tsuki = useTsuki()
   const { account } = useWallet()
   
-  const tsukibnbCakeLPAddress = tsuki ? tsuki.contracts.yycrv_pool.options.address : ''
+  const tsukibnbCakeLPAddress = tsuki ? tsuki.contracts.tsukiBnbLP.options.address : ''
   const { isApproved, isApproving, onApprove } = useApproval(
     tsukibnbCakeLPAddress,
     tsukibnbCakeLPAddress,
@@ -44,7 +43,7 @@ const Provider: React.FC = ({ children }) => {
 
   const fetchEarnedBalance = useCallback(async () => {
     if (!account || !tsuki) return
-    const balance = await getEarned(tsuki, tsuki.contracts.yycrv_pool, account)
+    const balance = await getEarned(tsuki, tsuki.contracts.tsukiBnbLP, account)
     setEarnedBalance(balance)
   }, [
     account,
@@ -54,7 +53,7 @@ const Provider: React.FC = ({ children }) => {
 
   const fetchStakedBalance = useCallback(async () => {
     if (!account || !tsuki) return
-    const balance = await getStaked(tsuki, tsuki.contracts.yycrv_pool, account)
+    const balance = await getStaked(tsuki, tsuki.contracts.tsukiBnbLP, account)
     setStakedBalance(balance)
   }, [
     account,
