@@ -18,8 +18,8 @@ export const getPoolStartTime = async (poolContract) => {
   return await poolContract.methods.starttime().call()
 }
 
-export const stake = async (yam, amount, account, onTxHash) => {
-  const poolContract = yam.contracts.yycrv_pool
+export const stake = async (tsuki, amount, account, onTxHash) => {
+  const poolContract = tsuki.contracts.tsukiBnbLPPool
   let now = new Date().getTime() / 1000;
   // const gas = GAS_LIMIT.STAKING[tokenName.toUpperCase()] || GAS_LIMIT.STAKING.DEFAULT;
   const gas = GAS_LIMIT.STAKING.DEFAULT
@@ -33,7 +33,7 @@ export const stake = async (yam, amount, account, onTxHash) => {
             return false
         }
         onTxHash && onTxHash(txHash)
-        const status = await waitTransaction(yam.web3.eth, txHash)
+        const status = await waitTransaction(tsuki.web3.eth, txHash)
         if (!status) {
           console.log("Staking transaction failed.")
           return false
