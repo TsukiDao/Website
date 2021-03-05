@@ -9,7 +9,8 @@ import ERC20Json from '../clean_build/contracts/IERC20.json';
 import TsukiJson from '../clean_build/contracts/TSUKI.json'
 import BNBCJson from '../clean_build/contracts/bnbc.json'
 import RebaserJson from '../clean_build/contracts/Rebaser.json'
-import TsukiBnbLPJson from '../clean_build/contracts/tsukibnbPool.json'
+import TsukiBnbLPJson from '../lib/uni2.json'
+import TsukiBnbLPPoolJson from '../clean_build/contracts/tsukibnbPool.json'
 
 import MigratorJson from "../clean_build/contracts/Migrator.json"
 
@@ -38,6 +39,7 @@ export class Contracts {
     this.bnbc = new this.web3.eth.Contract(BNBCJson)
     this.rebaser = new this.web3.eth.Contract(RebaserJson)
     this.tsukiBnbLP = new this.web3.eth.Contract(TsukiBnbLPJson)
+    this.tsukiBnbLPPool = new this.web3.eth.Contract(TsukiBnbLPPoolJson)
 
     this.migrator = new this.web3.eth.Contract(MigratorJson.abi);
 
@@ -54,6 +56,7 @@ export class Contracts {
     this.bnbc.setProvider(provider);
     this.rebaser.setProvider(provider);
     this.tsukiBnbLP.setProvider(provider);
+    this.tsukiBnbLPPool.setProvider(provider);
 
     const contracts = [
       { contract: this.migrator, json: MigratorJson },
@@ -74,6 +77,7 @@ export class Contracts {
     this.tsuki.options.address = addressMap["Tsuki"]
     this.bnbc.options.address = addressMap["BNBC"]
     this.tsukiBnbLP.options.address = addressMap["TsukiBnbLP"]
+    this.tsukiBnbLPPool.options.address = addressMap["TsukiBnbLPPool"]
 
     this.pools = [
       { "tokenAddr": this.bnbc.options.address, "poolAddr": this.tsukiBnbLP.options.address},
@@ -86,6 +90,7 @@ export class Contracts {
     this.tsuki.options.from = account;
     this.bnbc.options.address = account;
     this.tsukiBnbLP.options.from = account;
+    this.tsukiBnbLPPool.options.from = account;
   }
 
   async callContractFunction(

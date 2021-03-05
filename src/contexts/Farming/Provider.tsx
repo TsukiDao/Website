@@ -43,7 +43,7 @@ const Provider: React.FC = ({ children }) => {
 
   const fetchEarnedBalance = useCallback(async () => {
     if (!account || !tsuki) return
-    const balance = await getEarned(tsuki, tsuki.contracts.tsukiBnbLP, account)
+    const balance = await getEarned(tsuki, tsuki.contracts.tsukiBnbLPPool, account)
     setEarnedBalance(balance)
   }, [
     account,
@@ -53,7 +53,7 @@ const Provider: React.FC = ({ children }) => {
 
   const fetchStakedBalance = useCallback(async () => {
     if (!account || !tsuki) return
-    const balance = await getStaked(tsuki, tsuki.contracts.tsukiBnbLP, account)
+    const balance = await getStaked(tsuki, tsuki.contracts.tsukiBnbLPPool, account)
     setStakedBalance(balance)
   }, [
     account,
