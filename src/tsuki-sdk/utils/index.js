@@ -18,8 +18,13 @@ export const getPoolStartTime = async (poolContract) => {
   return await poolContract.methods.starttime().call()
 }
 
-export const stake = async (tsuki, amount, account, onTxHash) => {
-  const poolContract = tsuki.contracts.tsukiBnbLPPool
+export const stake = async (tsuki, pool, amount, account, onTxHash) => {
+  const poolContract = pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  if(poolContract === null) {
+    console.warn('pool not found:', pool)
+    return false
+  }
+
   let now = new Date().getTime() / 1000;
   // const gas = GAS_LIMIT.STAKING[tokenName.toUpperCase()] || GAS_LIMIT.STAKING.DEFAULT;
   const gas = GAS_LIMIT.STAKING.DEFAULT
@@ -45,8 +50,13 @@ export const stake = async (tsuki, amount, account, onTxHash) => {
   }
 }
 
-export const unstake = async (yam, amount, account, onTxHash) => {
-  const poolContract = yam.contracts.yycrv_pool
+export const unstake = async (tsuki, pool, amount, account, onTxHash) => {
+  const poolContract = pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  if(poolContract === null) {
+    console.warn('pool not found:', pool)
+    return false
+  }
+
   let now = new Date().getTime() / 1000;
   if (now >= 1597172400) {
     return poolContract.methods
@@ -58,7 +68,7 @@ export const unstake = async (yam, amount, account, onTxHash) => {
             return false
         }
         onTxHash && onTxHash(txHash)
-        const status = await waitTransaction(yam.web3.eth, txHash)
+        const status = await waitTransaction(tsuki.web3.eth, txHash)
         if (!status) {
           console.log("Unstaking transaction failed.")
           return false
@@ -70,8 +80,13 @@ export const unstake = async (yam, amount, account, onTxHash) => {
   }
 }
 
-export const harvest = async (yam, account, onTxHash) => {
-  const poolContract = yam.contracts.yycrv_pool
+export const harvest = async (tsuki, pool, account, onTxHash) => {
+  const poolContract = pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  if(poolContract === null) {
+    console.warn('pool not found:', pool)
+    return false
+  }
+
   let now = new Date().getTime() / 1000;
   if (now >= 1597172400) {
     return poolContract.methods
@@ -83,7 +98,7 @@ export const harvest = async (yam, account, onTxHash) => {
             return false
         }
         onTxHash && onTxHash(txHash)
-        const status = await waitTransaction(yam.web3.eth, txHash)
+        const status = await waitTransaction(tsuki.web3.eth, txHash)
         if (!status) {
           console.log("Harvest transaction failed.")
           return false
@@ -95,8 +110,12 @@ export const harvest = async (yam, account, onTxHash) => {
   }
 }
 
-export const redeem = async (yam, account, onTxHash) => {
-  const poolContract = yam.contracts.yycrv_pool
+export const redeem = async (tsuki, pool, account, onTxHash) => {
+  const poolContract = pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  if(poolContract === null) {
+    console.warn('pool not found:', pool)
+    return false
+  }
   let now = new Date().getTime() / 1000;
   if (now >= 1597172400) {
     return poolContract.methods
@@ -108,7 +127,7 @@ export const redeem = async (yam, account, onTxHash) => {
             return false
         }
         onTxHash && onTxHash(txHash)
-        const status = await waitTransaction(yam.web3.eth, txHash)
+        const status = await waitTransaction(tsuki.web3.eth, txHash)
         if (!status) {
           console.log("Redeem transaction failed.")
           return false
@@ -126,12 +145,12 @@ export const approve = async (tokenContract, poolContract, account) => {
     .send({ from: account, gas: 80000 })
 }
 
-export const getPoolContracts = async (yam) => {
-  const pools = Object.keys(yam.contracts)
+export const getPoolContracts = async (tsuki) => {
+  const pools = Object.keys(tsuki.contracts)
     .filter(c => c.indexOf('_pool') !== -1)
     .reduce((acc, cur) => {
       const newAcc = { ...acc }
-      newAcc[cur] = yam.contracts[cur]
+      newAcc[cur] = tsuki.contracts[cur]
       return newAcc
     }, {})
   return pools
@@ -140,13 +159,13 @@ export const getPoolContracts = async (yam) => {
 export const getEarned = async (yam, pool, account) => {
   // TODO: which contract has this?
   // const scalingFactor = new BigNumber(await yam.contracts.yamV3.methods.yamsScalingFactor().call())
-  const scalingFactor = new BigNumber("0")
+  const scalingFactor = new BigNumber("1000000000000000000")
   const earned = new BigNumber(await pool.methods.earned(account).call())
   return earned.multipliedBy(scalingFactor.dividedBy(new BigNumber(10).pow(18)))
 }
 
-export const getStaked = async (yam, pool, account) => {
-  return yam.toBigN(await pool.methods.balanceOf(account).call())
+export const getStaked = async (tsuki, pool, account) => {
+  return tsuki.toBigN(await pool.methods.balanceOf(account).call())
 }
 
 export const getCurrentPrice = async (yam) => {

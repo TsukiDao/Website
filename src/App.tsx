@@ -12,6 +12,7 @@ import TopBar from 'components/TopBar'
 
 import { BalancesProvider } from 'contexts/Balances'
 import { FarmingProvider } from 'contexts/Farming'
+import { FarmingProvider as Farming2Provider } from 'contexts/Farming2'
 import TsukiProvider from 'contexts/TsukiProvider'
 
 import Farm from 'views/Farm'
@@ -64,19 +65,19 @@ const Providers: React.FC = ({ children }) => {
       <UseWalletProvider
         chainId={56}
         connectors={{
-          walletconnect: { rpcUrl: 'https://mainnet.eth.aragon.network/' },
+          walletconnect: { rpcUrl: "https://mainnet.eth.aragon.network/" },
         }}
       >
         <TsukiProvider>
           <BalancesProvider>
             <FarmingProvider>
-                {children}
+              <Farming2Provider>{children}</Farming2Provider>
             </FarmingProvider>
           </BalancesProvider>
         </TsukiProvider>
       </UseWalletProvider>
     </ThemeProvider>
-  )
+  );
 }
 
 export default App

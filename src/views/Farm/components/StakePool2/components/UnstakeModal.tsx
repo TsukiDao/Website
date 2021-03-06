@@ -53,7 +53,7 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({
           onSelectMax={handleSelectMax}
           onChange={handleChange}
           max={fullBalance}
-          symbol="YYCRV_UNI_LP"
+          symbol="BNBC/BNB LP"
         />
       </ModalContent>
       <ModalActions>
