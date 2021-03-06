@@ -25,11 +25,11 @@ const StakeModal: React.FC<StakeModalProps> = ({
 }) => {
 
   const [val, setVal] = useState('')
-  const { tsukibnbCakeLpBalance } = useBalances()
+  const { bnbcBnbLpBalance } = useBalances()
 
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(tsukibnbCakeLpBalance || new BigNumber(0), 0)
-  }, [tsukibnbCakeLpBalance])
+    return getFullDisplayBalance(bnbcBnbLpBalance || new BigNumber(0), 0)
+  }, [bnbcBnbLpBalance])
 
   const handleChange = useCallback((e: React.FormEvent<HTMLInputElement>) => {
     setVal(e.currentTarget.value)
@@ -52,7 +52,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
           onSelectMax={handleSelectMax}
           onChange={handleChange}
           max={fullBalance}
-          symbol="BNBC_UNI_LP"
+          symbol="BNBC/BNB LP"
         />
       </ModalContent>
       <ModalActions>

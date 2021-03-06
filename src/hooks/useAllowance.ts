@@ -24,7 +24,7 @@ const useAllowance = (tokenAddress?: string, spenderAddress?: string) => {
     }
     let refreshInterval = setInterval(fetchAllowance, 10000)
     return () => clearInterval(refreshInterval)
-  }, [account, ethereum, spenderAddress, tokenAddress])
+  }, [account, ethereum, fetchAllowance, spenderAddress, tokenAddress])
 
   return allowance
 }

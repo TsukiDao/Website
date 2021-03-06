@@ -9,8 +9,10 @@ import ERC20Json from '../clean_build/contracts/IERC20.json';
 import TsukiJson from '../clean_build/contracts/TSUKI.json'
 import BNBCJson from '../clean_build/contracts/bnbc.json'
 import RebaserJson from '../clean_build/contracts/Rebaser.json'
-import TsukiBnbLPJson from '../lib/uni2.json'
-import TsukiBnbLPPoolJson from '../clean_build/contracts/tsukibnbPool.json'
+import TsukiBnbLpJson from '../clean_build/contracts/UniswapPair.json'
+import TsukiBnbLpPoolJson from '../clean_build/contracts/tsukibnbPool.json'
+import BnbcBnbLpJson from '../clean_build/contracts/UniswapPair.json'
+import BnbcBnbLpPoolJson from '../clean_build/contracts/bnbcbnbPool.json'
 
 import MigratorJson from "../clean_build/contracts/Migrator.json"
 
@@ -38,8 +40,10 @@ export class Contracts {
     this.tsuki = new this.web3.eth.Contract(TsukiJson)
     this.bnbc = new this.web3.eth.Contract(BNBCJson)
     this.rebaser = new this.web3.eth.Contract(RebaserJson)
-    this.tsukiBnbLP = new this.web3.eth.Contract(TsukiBnbLPJson)
-    this.tsukiBnbLPPool = new this.web3.eth.Contract(TsukiBnbLPPoolJson)
+    this.tsukiBnbLp = new this.web3.eth.Contract(TsukiBnbLpJson.abi)
+    this.tsukiBnbLpPool = new this.web3.eth.Contract(TsukiBnbLpPoolJson)
+    this.bnbcBnbLp = new this.web3.eth.Contract(BnbcBnbLpJson.abi)
+    this.bnbcBnbLpPool = new this.web3.eth.Contract(BnbcBnbLpPoolJson)
 
     this.migrator = new this.web3.eth.Contract(MigratorJson.abi);
 
@@ -55,8 +59,10 @@ export class Contracts {
     this.tsuki.setProvider(provider);
     this.bnbc.setProvider(provider);
     this.rebaser.setProvider(provider);
-    this.tsukiBnbLP.setProvider(provider);
-    this.tsukiBnbLPPool.setProvider(provider);
+    this.tsukiBnbLp.setProvider(provider);
+    this.tsukiBnbLpPool.setProvider(provider);
+    this.bnbcBnbLp.setProvider(provider);
+    this.bnbcBnbLpPool.setProvider(provider);
 
     const contracts = [
       { contract: this.migrator, json: MigratorJson },
@@ -76,11 +82,14 @@ export class Contracts {
 
     this.tsuki.options.address = addressMap["Tsuki"]
     this.bnbc.options.address = addressMap["BNBC"]
-    this.tsukiBnbLP.options.address = addressMap["TsukiBnbLP"]
-    this.tsukiBnbLPPool.options.address = addressMap["TsukiBnbLPPool"]
+    this.tsukiBnbLp.options.address = addressMap["TsukiBnbLp"]
+    this.tsukiBnbLpPool.options.address = addressMap["TsukiBnbLpPool"]
+    this.bnbcBnbLp.options.address = addressMap["BnbcBnbLp"]
+    this.bnbcBnbLpPool.options.address = addressMap["BnbcBnbLpPool"]
 
     this.pools = [
-      { "tokenAddr": this.bnbc.options.address, "poolAddr": this.tsukiBnbLP.options.address},
+      { "tokenAddr": this.bnbc.options.address, "poolAddr": this.tsukiBnbLpPool.options.address},
+      { "tokenAddr": this.bnbc.options.address, "poolAddr": this.bnbcBnbLpPool.options.address},
     ]
   }
 
@@ -89,8 +98,10 @@ export class Contracts {
   ) {
     this.tsuki.options.from = account;
     this.bnbc.options.address = account;
-    this.tsukiBnbLP.options.from = account;
-    this.tsukiBnbLPPool.options.from = account;
+    this.tsukiBnbLp.options.from = account;
+    this.tsukiBnbLpPool.options.from = account;
+    this.bnbcBnbLp.options.from = account;
+    this.bnbcBnbLpPool.options.from = account;
   }
 
   async callContractFunction(
