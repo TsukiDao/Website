@@ -10,6 +10,8 @@ import Split from "components/Split";
 
 import useFarming from "hooks/useFarming";
 
+import HarvestCard0 from "./components/HarvestPool0";
+import StakeCard0 from "./components/StakePool0";
 import HarvestCard from "./components/Harvest";
 import HarvestCard2 from "./components/HarvestPool2";
 import StakeCard from "./components/Stake";
@@ -68,23 +70,19 @@ const Farm: React.FC = () => {
       />
       <Container>
         <Split>
+          <StakeCard0 />
+          <HarvestCard0 />
+        </Split>
+        <Split>
           <StakeCard />
           <HarvestCard />
         </Split>
-        <Box row justifyContent="center">
-          {RedeemButton}
-        </Box>
         <Split>
           <StakeCard2 />
           <HarvestCard2 />
         </Split>
-        <Box row justifyContent="center">
-          {RedeemButton2}
-        </Box>
         <Spacer />
-        <Spacer size="lg" />
         <Separator />
-        <Spacer size="lg" />
         <Split>
           <Button
             full
