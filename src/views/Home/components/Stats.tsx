@@ -10,6 +10,7 @@ import {
 
 import FancyValue from 'components/FancyValue'
 import useTsuki from 'hooks/useTsuki'
+import bnb_logo from "./bnb_icon.png"
 import { bnToDec } from 'utils'
 import {
   getCurrentPrice,
@@ -44,7 +45,7 @@ const Stats: React.FC = () => {
       <Card>
         <CardContent>
           <FancyValue
-            icon="💲"
+            icon= {<img src={bnb_logo} />}
             label="Current price (TWAP)"
             value={currentPrice ? currentPrice : '--'}
           />
