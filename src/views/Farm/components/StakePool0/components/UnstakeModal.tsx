@@ -12,7 +12,7 @@ import {
 
 import TokenInput from 'components/TokenInput'
 
-import useFarming from 'hooks/useFarming'
+import useFarming0 from 'hooks/useFarming0'
 import { getFullDisplayBalance } from 'utils'
 
 interface UnstakeModalProps extends ModalProps {
@@ -26,7 +26,7 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({
 }) => {
 
   const [val, setVal] = useState('')
-  const { stakedBalance } = useFarming()
+  const { stakedBalance } = useFarming0()
 
   const fullBalance = useMemo(() => {
     return getFullDisplayBalance(stakedBalance || new BigNumber(0))
@@ -53,7 +53,7 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({
           onSelectMax={handleSelectMax}
           onChange={handleChange}
           max={fullBalance}
-          symbol="Tsuki/BNB LP"
+          symbol="Tsuki"
         />
       </ModalContent>
       <ModalActions>
