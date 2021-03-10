@@ -19,7 +19,7 @@ export const getPoolStartTime = async (poolContract) => {
 }
 
 export const stake = async (tsuki, pool, amount, account, onTxHash) => {
-  const poolContract = pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  const poolContract = pool === 'tsuki' ? tsuki.contracts.tsukiPool : pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
   if(poolContract === null) {
     console.warn('pool not found:', pool)
     return false
@@ -51,7 +51,7 @@ export const stake = async (tsuki, pool, amount, account, onTxHash) => {
 }
 
 export const unstake = async (tsuki, pool, amount, account, onTxHash) => {
-  const poolContract = pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  const poolContract = pool === 'tsuki' ? tsuki.contracts.tsukiPool : pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
   if(poolContract === null) {
     console.warn('pool not found:', pool)
     return false
@@ -81,7 +81,7 @@ export const unstake = async (tsuki, pool, amount, account, onTxHash) => {
 }
 
 export const harvest = async (tsuki, pool, account, onTxHash) => {
-  const poolContract = pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  const poolContract = pool === 'tsuki' ? tsuki.contracts.tsukiPool : pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
   if(poolContract === null) {
     console.warn('pool not found:', pool)
     return false
@@ -111,7 +111,7 @@ export const harvest = async (tsuki, pool, account, onTxHash) => {
 }
 
 export const redeem = async (tsuki, pool, account, onTxHash) => {
-  const poolContract = pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  const poolContract = pool === 'tsuki' ? tsuki.contracts.tsukiPool : pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
   if(poolContract === null) {
     console.warn('pool not found:', pool)
     return false

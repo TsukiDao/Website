@@ -12,12 +12,13 @@ import TopBar from 'components/TopBar'
 
 import { BalancesProvider } from 'contexts/Balances'
 import { FarmingProvider } from 'contexts/Farming'
-import { FarmingProvider as Farming2Provider } from 'contexts/Farming2'
+import { Farming2Provider } from 'contexts/Farming2'
 import TsukiProvider from 'contexts/TsukiProvider'
 
 import Farm from 'views/Farm'
 import FAQ from 'views/FAQ'
 import Home from 'views/Home'
+import { Farming0Provider } from 'contexts/Farming0'
 
 
 const App: React.FC = () => {
@@ -70,9 +71,11 @@ const Providers: React.FC = ({ children }) => {
       >
         <TsukiProvider>
           <BalancesProvider>
-            <FarmingProvider>
-              <Farming2Provider>{children}</Farming2Provider>
-            </FarmingProvider>
+            <Farming0Provider>
+              <FarmingProvider>
+                <Farming2Provider>{children}</Farming2Provider>
+              </FarmingProvider>
+            </Farming0Provider>
           </BalancesProvider>
         </TsukiProvider>
       </UseWalletProvider>

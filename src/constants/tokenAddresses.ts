@@ -1,5 +1,5 @@
-export const tsuki = '0x695E632b32bfa639639D073265dA32a6afd8Fc53'
-export const bnbc  = '0xd0C3CB0fbfc352ad8032A07d2eF3771B61F83a5f'
-export const tsukibnbCakeLP = '0x17b21a12d09ca9475a8c6cf805b7d21d5a3eeaec'
-export const bnbcbnbCakeLP = '0xa31632268cc7caa5edda6aba864fe3642dcc3693'
+export const tsuki = '0x3fd9e7041c45622e8026199a46f763c9807f66f3'
+export const bnbc  = '0x569fF542CCf66a1F15BA018802b6BDB6263C9b44'
+export const tsukibnbCakeLP = '0xfeD89dEBB8d6C9140360007960E0ecF329A18755'
+export const bnbcbnbCakeLP = '0x558a6847be1256F9a7a0b215391a81fF68cf719B'
 
