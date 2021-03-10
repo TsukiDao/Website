@@ -65,7 +65,7 @@ const Harvest: React.FC = () => {
 
   const formattedEarnedBalance = useMemo(() => {
     if (earnedBalance) {
-      return numeral(bnToDec(earnedBalance)).format('0.00a')
+      return numeral(bnToDec(earnedBalance)).format('0.0000a')
     } else {
       return '--'
     }
