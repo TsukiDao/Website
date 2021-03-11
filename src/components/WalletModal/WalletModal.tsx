@@ -31,6 +31,7 @@ const WalletModal: React.FC<ModalProps> = ({
   const { reset } = useWallet()
   const {
     tsukiBalance,
+    bnbcBalance
   } = useBalances()
 
 
@@ -50,6 +51,7 @@ const WalletModal: React.FC<ModalProps> = ({
     <Modal isOpen={isOpen}>
       <ModalTitle text="My Wallet" />
       <ModalContent>
+        <Split>
           <Box row>
             <FancyValue
               icon= {<img src={logo} />}
@@ -57,6 +59,14 @@ const WalletModal: React.FC<ModalProps> = ({
               value={getDisplayBalance(tsukiBalance)}
             />
           </Box>
+          <Box row>
+            <FancyValue
+              icon= "🌕"
+              label="BNBC balance"
+              value={getDisplayBalance(bnbcBalance)}
+            />
+          </Box>
+          </Split>
         <Spacer />
       </ModalContent>
       <Separator />
