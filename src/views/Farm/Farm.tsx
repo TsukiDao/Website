@@ -65,7 +65,7 @@ const Farm: React.FC = () => {
     <Page>
       <PageHeader
         icon={<img src={logo} />}
-        subtitle="Stake TSUKI/BNB LP tokens and grow BNB CASH"
+        subtitle="Stake tokens and grow BNB CASH"
         title="Farm"
       />
       <Container>
@@ -90,13 +90,19 @@ const Farm: React.FC = () => {
             href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=ETH&outputCurrency=0x3fd9e7041c45622e8026199a46f763c9807f66f3&exactField=output&exactAmount=106"
             variant="tertiary"
           />
-
+          <Button
+            full
+            text="Buy BNBC"
+            href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=ETH&outputCurrency=0x3fd9e7041c45622e8026199a46f763c9807f66f3&exactField=output&exactAmount=106"
+            variant="tertiary"
+          />
           <Button
             full
             text="Get TSUKI/BNB LP tokens"
             href="https://exchange.pancakeswap.finance/#/add/0x3fd9e7041c45622e8026199a46f763c9807f66f3/ETH"
             variant="tertiary"
           />
+
         </Split>
       </Container>
     </Page>
