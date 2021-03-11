@@ -158,7 +158,7 @@ const Stake: React.FC = () => {
 
   const formattedStakedBalance = useMemo(() => {
     if (stakedBalance) {
-      return numeral(bnToDec(stakedBalance)).format('0.00a')
+      return numeral(bnToDec(stakedBalance)).format('0.0000a')
     } else {
       return '--'
     }
