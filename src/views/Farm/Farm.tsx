@@ -79,7 +79,7 @@ const Farm: React.FC = () => {
         <Split>
           <p style={{textAlign: 'center'}}> 
            <span>Farming in starts in:  </span>         
-            <Countdown date={'2021-03-12T05:45:00.000+00:00'}>
+            <Countdown date={'2021-03-13T20:00:00.000+00:00'}>
               <Completionist />
             </Countdown>
           </p>
