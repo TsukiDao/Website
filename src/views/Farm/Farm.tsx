@@ -4,9 +4,13 @@ import { Box, Button, Container, Separator, Spacer } from "react-neu";
 
 import { useWallet } from "use-wallet";
 
+import Countdown from 'react-countdown';
+
+
 import Page from "components/Page";
 import PageHeader from "components/PageHeader";
 import Split from "components/Split";
+
 
 import useFarming from "hooks/useFarming";
 
@@ -61,6 +65,9 @@ const Farm: React.FC = () => {
     return <Button disabled text="Redeeming..." variant="secondary" />;
   }, [isRedeeming2, onRedeem2]);
 
+  const Completionist = () => <span>You are good to go!</span>;
+
+
   return (
     <Page>
       <PageHeader
@@ -69,6 +76,14 @@ const Farm: React.FC = () => {
         title="Farm"
       />
       <Container>
+        <Split>
+          <p style={{textAlign: 'center'}}> 
+           <span>Farming in starts in:  </span>         
+            <Countdown date={'2021-03-12T05:45:00.000+00:00'}>
+              <Completionist />
+            </Countdown>
+          </p>
+        </Split>
         <Split>
           <StakeCard0 />
           <HarvestCard0 />
