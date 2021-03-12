@@ -14,8 +14,10 @@ import { useWallet } from 'use-wallet'
 
 import metamaskLogo from 'assets/metamask-fox.svg'
 import walletConnectLogo from 'assets/wallet-connect.svg'
+import trustLogo  from 'assets/trust.svg'
 
 import WalletProviderCard from './components/WalletProviderCard'
+import Split from 'components/Split'
 
 const UnlockWalletModal: React.FC<ModalProps> = ({
   isOpen,
@@ -42,6 +44,7 @@ const UnlockWalletModal: React.FC<ModalProps> = ({
       <ModalTitle text="Select a wallet provider." />
       <ModalContent>
         <StyledWalletsWrapper>
+          <Split>
           <Box flex={1}>
             <WalletProviderCard
               icon={<img src={metamaskLogo} style={{ height: 32 }} />}
@@ -49,6 +52,14 @@ const UnlockWalletModal: React.FC<ModalProps> = ({
               onSelect={handleConnectMetamask}
             />
           </Box>
+          <Box flex={2}>
+          <WalletProviderCard
+              icon={<img src={trustLogo} style={{ height: 32 }} />}
+              name="TrustWallet"
+              onSelect={handleConnectMetamask}
+            />
+          </Box>
+          </Split>
           <Spacer />
 
         </StyledWalletsWrapper>
