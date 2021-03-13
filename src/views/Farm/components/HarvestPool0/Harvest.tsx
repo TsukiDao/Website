@@ -31,7 +31,6 @@ const Harvest: React.FC = () => {
     if (status !== 'connected') {
       return (
         <Button
-          disabled
           full
           text="Harvest"
           variant="secondary"
@@ -65,7 +64,7 @@ const Harvest: React.FC = () => {
 
   const formattedEarnedBalance = useMemo(() => {
     if (earnedBalance) {
-      return numeral(bnToDec(earnedBalance)).format('0.00000a')
+      return numeral(bnToDec(earnedBalance)).format('0.000000a')
     } else {
       return '--'
     }

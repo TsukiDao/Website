@@ -31,7 +31,6 @@ const Harvest: React.FC = () => {
     if (status !== 'connected') {
       return (
         <Button
-          disabled
           full
           text="Harvest"
           variant="secondary"
