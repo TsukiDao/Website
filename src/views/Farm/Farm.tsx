@@ -102,13 +102,13 @@ const Farm: React.FC = () => {
           <Button
             full
             text="Buy TSUKI"
-            href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=ETH&outputCurrency=0x3fd9e7041c45622e8026199a46f763c9807f66f3"
+            href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x3fd9e7041c45622e8026199a46f763c9807f66f3"
             variant="tertiary"
           />
           <Button
             full
             text="Buy BNBC"
-            href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=ETH&outputCurrency=0x31B5d91806AF3364678715f4C5Bf50c1e3bAE10A/ETH"
+            href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x31B5d91806AF3364678715f4C5Bf50c1e3bAE10A"
             variant="tertiary"
           />
           <Button
