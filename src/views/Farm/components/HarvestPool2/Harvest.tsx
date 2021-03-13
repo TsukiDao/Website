@@ -33,7 +33,7 @@ const Harvest: React.FC = () => {
         <Button
           full
           text="Harvest"
-          variant="secondary"
+          onClick={onHarvest}
         />
       )
     }
@@ -64,7 +64,7 @@ const Harvest: React.FC = () => {
 
   const formattedEarnedBalance = useMemo(() => {
     if (earnedBalance) {
-      return numeral(bnToDec(earnedBalance)).format('0.000000a')
+      return numeral(bnToDec(earnedBalance)).format('0.00000a')
     } else {
       return '--'
     }

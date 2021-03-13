@@ -31,9 +31,9 @@ const Harvest: React.FC = () => {
     if (status !== 'connected') {
       return (
         <Button
-          full
-          text="Harvest"
-          variant="secondary"
+        full
+        text="Harvest"
+        onClick={onHarvest}
         />
       )
     }

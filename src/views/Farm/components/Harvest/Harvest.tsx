@@ -33,7 +33,7 @@ const Harvest: React.FC = () => {
         <Button
           full
           text="Harvest"
-          variant="secondary"
+          onClick={onHarvest}
         />
       )
     }
