@@ -66,7 +66,7 @@ const Providers: React.FC = ({ children }) => {
       <UseWalletProvider
         chainId={56}
         connectors={{
-          walletconnect: { rpcUrl: "https://mainnet.eth.aragon.network/" },
+          walletconnect: { rpcUrl: "https://bridge.walletconnect.org" },
         }}
       >
         <TsukiProvider>
