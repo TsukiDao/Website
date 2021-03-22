@@ -44,6 +44,7 @@ const UnlockWalletModal: React.FC<ModalProps> = ({
       <ModalTitle text="Select a wallet provider." />
       <ModalContent>
         <StyledWalletsWrapper>
+          <StyledWalletsInnerWrapper>
           <Split>
           <Box flex={1}>
             <WalletProviderCard
@@ -64,11 +65,11 @@ const UnlockWalletModal: React.FC<ModalProps> = ({
           <Split>
           <WalletProviderCard
               icon={<img src={walletConnectLogo} style={{ height: 32 }} />}
-              name="TrustWallet"
+              name="WalletConnect"
               onSelect={handleConnectWalletConnect}
             />
           </Split>
-
+          </StyledWalletsInnerWrapper>
         </StyledWalletsWrapper>
       </ModalContent>
       <ModalActions>
@@ -76,7 +77,7 @@ const UnlockWalletModal: React.FC<ModalProps> = ({
           <Button onClick={onDismiss} text="Cancel" variant="secondary" />
         </Box>
       </ModalActions>
-    </Modal>
+      </Modal>
   )
 }
 
@@ -86,7 +87,12 @@ const StyledWalletsWrapper = styled.div`
   @media (max-width: 600px) {
     flex-direction: column;
     flex-wrap: none;
+    overflow-y: auto;
+    height: 60vh;
   }
+`
+const StyledWalletsInnerWrapper = styled.div`
+  flex: 1 1 auto;
 `
 
 export default UnlockWalletModal

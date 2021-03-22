@@ -186,7 +186,7 @@ const Stake: React.FC = () => {
             column
           >
             <Value value={formattedStakedBalance} />
-            <Label text="Staked TSUKI Tokens" />
+            <Label text="Staked TSUKI Tokens - 6x" />
             <a target="_blank" href='https://exchange.pancakeswap.finance/#/swap?inputCurrency=ETH&outputCurrency=0x3fd9e7041c45622e8026199a46f763c9807f66f3&exactField=output&exactAmount=106'> Buy TSUKI</a>
           </Box>
         </CardContent>
