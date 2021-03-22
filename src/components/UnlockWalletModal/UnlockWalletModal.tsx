@@ -44,7 +44,7 @@ const UnlockWalletModal: React.FC<ModalProps> = ({
       <ModalTitle text="Select a wallet provider." />
       <ModalContent>
         <StyledWalletsWrapper>
-          <ModalScrollWrapper>
+          <StyledWalletsInnerWrapper>
           <Split>
           <Box flex={1}>
             <WalletProviderCard
@@ -69,7 +69,7 @@ const UnlockWalletModal: React.FC<ModalProps> = ({
               onSelect={handleConnectWalletConnect}
             />
           </Split>
-          </ModalScrollWrapper>
+          </StyledWalletsInnerWrapper>
         </StyledWalletsWrapper>
       </ModalContent>
       <ModalActions>
@@ -91,7 +91,7 @@ const StyledWalletsWrapper = styled.div`
     height: 60vh;
   }
 `
-const ModalScrollWrapper = styled.div`
+const StyledWalletsInnerWrapper = styled.div`
   flex: 1 1 auto;
 `
 
