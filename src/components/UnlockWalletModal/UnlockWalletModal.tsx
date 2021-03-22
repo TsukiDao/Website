@@ -95,5 +95,4 @@ const ModalScrollWrapper = styled.div`
   flex: 1 1 auto;
 `
 
-
 export default UnlockWalletModal
