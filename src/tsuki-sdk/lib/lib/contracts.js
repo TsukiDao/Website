@@ -8,6 +8,9 @@ import ERC20Json from '../clean_build/contracts/IERC20.json';
 // import UNIRouterJson from './uniR.json';
 import TsukiJson from '../clean_build/contracts/TSUKI.json'
 import BNBCJson from '../clean_build/contracts/bnbc.json'
+import OrchestratorJson from '../clean_build/contracts/Orchestrator.json'
+import OracleJson from '../clean_build/contracts/Oracle.json'
+import PolicyJson from '../clean_build/contracts/Policy.json'
 import RebaserJson from '../clean_build/contracts/Rebaser.json'
 import TsukiBnbLpJson from '../clean_build/contracts/UniswapPair.json'
 import TsukiBnbLpPoolJson from '../clean_build/contracts/tsukibnbPool.json'
@@ -40,6 +43,9 @@ export class Contracts {
     this.tsuki = new this.web3.eth.Contract(TsukiJson)
     this.bnbc = new this.web3.eth.Contract(BNBCJson)
     this.rebaser = new this.web3.eth.Contract(RebaserJson)
+    this.orchestrator = new this.web3.eth.Contract(OrchestratorJson)
+    this.oracle = new this.web3.eth.Contract(OracleJson)
+    this.policy = new this.web3.eth.Contract(PolicyJson)
     this.tsukiBnbLp = new this.web3.eth.Contract(TsukiBnbLpJson.abi)
     this.tsukiBnbLpPool = new this.web3.eth.Contract(TsukiBnbLpPoolJson)
     this.bnbcBnbLp = new this.web3.eth.Contract(BnbcBnbLpJson.abi)
@@ -60,6 +66,9 @@ export class Contracts {
     this.tsuki.setProvider(provider);
     this.bnbc.setProvider(provider);
     this.rebaser.setProvider(provider);
+    this.orchestrator.setProvider(provider);
+    this.oracle.setProvider(provider);
+    this.policy.setProvider(provider);
     this.tsukiBnbLp.setProvider(provider);
     this.tsukiBnbLpPool.setProvider(provider);
     this.bnbcBnbLp.setProvider(provider);
@@ -89,6 +98,9 @@ export class Contracts {
     this.bnbcBnbLp.options.address = addressMap["BnbcBnbLp"]
     this.bnbcBnbLpPool.options.address = addressMap["BnbcBnbLpPool"]
     this.tsukiPool.options.address = addressMap["TsukiPool"]
+    this.orchestrator.options.address = addressMap["Orchestrator"]
+    this.oracle.options.address = addressMap["Oracle"]
+    this.policy.options.address = addressMap["Policy"]
 
     this.pools = [
       { "tokenAddr": this.bnbc.options.address, "poolAddr": this.tsukiBnbLpPool.options.address},
