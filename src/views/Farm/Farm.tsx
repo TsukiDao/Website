@@ -77,14 +77,6 @@ const Farm: React.FC = () => {
       />
       <Container>
         <Split>
-          <p style={{textAlign: 'center'}}> 
-           <span>Farming in starts in:  </span>         
-            <Countdown date={'2021-03-13T20:00:00.000+00:00'}>
-              <Completionist />
-            </Countdown>
-          </p>
-        </Split>
-        <Split>
           <StakeCard0 />
           <HarvestCard0 />
         </Split>
