@@ -33,9 +33,9 @@ export const stake = async (tsuki, pool, amount, account, onTxHash) => {
       .stake((new BigNumber(amount).times(new BigNumber(10).pow(18))).toString())
       .send({ from: account, gas }, async (error, txHash) => {
         if (error) {
-            onTxHash && onTxHash('')
-            console.log("Staking error", error)
-            return false
+          onTxHash && onTxHash('')
+          console.log("Staking error", error)
+          return false
         }
         onTxHash && onTxHash(txHash)
         const status = await waitTransaction(tsuki.web3.eth, txHash)
@@ -63,9 +63,9 @@ export const unstake = async (tsuki, pool, amount, account, onTxHash) => {
       .withdraw((new BigNumber(amount).times(new BigNumber(10).pow(18))).toString())
       .send({ from: account, gas: 200000 }, async (error, txHash) => {
         if (error) {
-            onTxHash && onTxHash('')
-            console.log("Unstaking error", error)
-            return false
+          onTxHash && onTxHash('')
+          console.log("Unstaking error", error)
+          return false
         }
         onTxHash && onTxHash(txHash)
         const status = await waitTransaction(tsuki.web3.eth, txHash)
@@ -93,9 +93,9 @@ export const harvest = async (tsuki, pool, account, onTxHash) => {
       .getReward()
       .send({ from: account, gas: 200000 }, async (error, txHash) => {
         if (error) {
-            onTxHash && onTxHash('')
-            console.log("Harvest error", error)
-            return false
+          onTxHash && onTxHash('')
+          console.log("Harvest error", error)
+          return false
         }
         onTxHash && onTxHash(txHash)
         const status = await waitTransaction(tsuki.web3.eth, txHash)
@@ -122,9 +122,9 @@ export const redeem = async (tsuki, pool, account, onTxHash) => {
       .exit()
       .send({ from: account, gas: 400000 }, async (error, txHash) => {
         if (error) {
-            onTxHash && onTxHash('')
-            console.log("Redeem error", error)
-            return false
+          onTxHash && onTxHash('')
+          console.log("Redeem error", error)
+          return false
         }
         onTxHash && onTxHash(txHash)
         const status = await waitTransaction(tsuki.web3.eth, txHash)
@@ -156,9 +156,9 @@ export const getPoolContracts = async (tsuki) => {
   return pools
 }
 
-export const getEarned = async (yam, pool, account) => {
+export const getEarned = async (tsuki, pool, account) => {
   // TODO: which contract has this?
-  // const scalingFactor = new BigNumber(await yam.contracts.yamV3.methods.yamsScalingFactor().call())
+  // const scalingFactor = new BigNumber(await tsuki.contracts.tsukiV3.methods.tsukisScalingFactor().call())
   const scalingFactor = new BigNumber("1000000000000000000")
   const earned = new BigNumber(await pool.methods.earned(account).call())
   return earned.multipliedBy(scalingFactor.dividedBy(new BigNumber(10).pow(18)))
@@ -168,143 +168,97 @@ export const getStaked = async (tsuki, pool, account) => {
   return tsuki.toBigN(await pool.methods.balanceOf(account).call())
 }
 
-export const getCurrentPrice = async (yam) => {
-  // FORBROCK: get current YAM price
-  // TODO: which contract has this?
-  // return new BigNumber(await yam.contracts.rebaser.methods.getCurrentTWAP().call())
-  return new BigNumber("0")
+export const getCurrentPrice = async (tsuki) => {
+  return new BigNumber(
+    await tsuki.contracts.oracle.methods.getCurrentTWAP().call()
+  )
 }
 
-export const getTargetPrice = async (yam) => {
-  return yam.toBigN(1).toFixed(2);
+export const getTargetPrice = async (tsuki) => {
+  return tsuki.toBigN(1).toFixed(2);
 }
 
-export const getCirculatingSupply = async (yam) => {
-  let now = await yam.web3.eth.getBlock('latest');
-  let scalingFactor = yam.toBigN(await yam.contracts.yamV3.methods.yamsScalingFactor().call());
-  let starttime = yam.toBigN(await yam.contracts.eth_pool.methods.starttime().call()).toNumber();
-  let timePassed = now["timestamp"] - starttime;
-  if (timePassed < 0) {
-    return 0;
-  }
-  let yamsDistributed = yam.toBigN(8 * timePassed * 250000 / 625000); //yams from first 8 pools
-  let starttimePool2 = yam.toBigN(await yam.contracts.ycrv_pool.methods.starttime().call()).toNumber();
-  timePassed = now["timestamp"] - starttime;
-  let pool2Yams = yam.toBigN(timePassed * 1500000 / 625000); // yams from second pool. note: just accounts for first week
-  let circulating = pool2Yams.plus(yamsDistributed).times(scalingFactor).dividedBy(10**36).toFixed(2)
-  return circulating
-}
-
-export const getNextRebaseTimestamp = async (yam) => {
+export const rebase = async (account, tsuki) => {
   try {
-    let now = await yam.web3.eth.getBlock('latest').then(res => res.timestamp);
-    let interval = 43200; // 12 hours
-    let offset = 28800; // 8am/8pm utc
-    let secondsToRebase = 0;
-    if (await yam.contracts.rebaser.methods.rebasingActive().call()) {
-      if (now % interval > offset) {
-          secondsToRebase = (interval - (now % interval)) + offset;
-       } else {
-          secondsToRebase = offset - (now % interval);
-      }
-    } else {
-      let twap_init = yam.toBigN(await yam.contracts.rebaser.methods.timeOfTWAPInit().call()).toNumber();
-      if (twap_init > 0) {
-        let delay = yam.toBigN(await yam.contracts.rebaser.methods.rebaseDelay().call()).toNumber();
-        let endTime = twap_init + delay;
-        if (endTime % interval > offset) {
-            secondsToRebase = (interval - (endTime % interval)) + offset;
-         } else {
-            secondsToRebase = offset - (endTime % interval);
-        }
-        return endTime + secondsToRebase;
-      } else {
-        return now + 13*60*60; // just know that its greater than 12 hours away
-      }
-    }
-    return secondsToRebase
-  } catch (e) {
-    console.log(e)
+    return await tsuki.contracts.orchestrator.methods.rebase().send({from: account})
+  } catch (error) {
+    console.error(error)
   }
 }
 
-export const getTotalSupply = async (yam) => {
-  return await yam.contracts.yam.methods.totalSupply().call();
+export const getTotalSupply = async (tsuki) => {
+  return tsuki && (await tsuki.contracts.bnbc.methods.totalSupply().call())
 }
 
-export const getStats = async (yam) => {
-  const curPrice = await getCurrentPrice(yam)
-  const circSupply = await getCirculatingSupply(yam)
-  const nextRebase = await getNextRebaseTimestamp(yam)
-  const targetPrice = await getTargetPrice(yam)
-  const totalSupply = await getTotalSupply(yam)
+export const getStats = async (tsuki) => {
+  const curPrice = await getCurrentPrice(tsuki)
+  const targetPrice = await getTargetPrice(tsuki)
+  const totalSupply = await getTotalSupply(tsuki)
   return {
-    circSupply,
     curPrice,
-    nextRebase,
     targetPrice,
-    totalSupply
+    totalSupply,
   }
 }
 
-export const vote = async (yam, account) => {
-  return yam.contracts.gov.methods.castVote(0, true).send({ from: account })
+export const vote = async (tsuki, account) => {
+  return tsuki.contracts.gov.methods.castVote(0, true).send({ from: account })
 }
 
-export const delegate = async (yam, account) => {
-  return yam.contracts.yam.methods.delegate("0x683A78bA1f6b25E29fbBC9Cd1BFA29A51520De84").send({from: account, gas: 320000 })
+export const delegate = async (tsuki, account) => {
+  return tsuki.contracts.tsuki.methods.delegate("0x683A78bA1f6b25E29fbBC9Cd1BFA29A51520De84").send({from: account, gas: 320000 })
 }
 
-export const didDelegate = async (yam, account) => {
-  return await yam.contracts.yam.methods.delegates(account).call() === '0x683A78bA1f6b25E29fbBC9Cd1BFA29A51520De84'
+export const didDelegate = async (tsuki, account) => {
+  return await tsuki.contracts.tsuki.methods.delegates(account).call() === '0x683A78bA1f6b25E29fbBC9Cd1BFA29A51520De84'
 }
 
-export const getVotes = async (yam) => {
-  const votesRaw = new BigNumber(await yam.contracts.yam.methods.getCurrentVotes("0x683A78bA1f6b25E29fbBC9Cd1BFA29A51520De84").call()).dividedBy(10**24)
+export const getVotes = async (tsuki) => {
+  const votesRaw = new BigNumber(await tsuki.contracts.tsuki.methods.getCurrentVotes("0x683A78bA1f6b25E29fbBC9Cd1BFA29A51520De84").call()).dividedBy(10**24)
   return votesRaw
 }
 
-export const getScalingFactor = async (yam) => {
+export const getScalingFactor = async (tsuki) => {
   // TODO: which contract has this?
-  // return new BigNumber(await yam.contracts.yamV3.methods.yamsScalingFactor().call())
+  // return new BigNumber(await tsuki.contracts.tsukiV3.methods.tsukisScalingFactor().call())
   return new BigNumber("0")
 }
 
-export const getDelegatedBalance = async (yam, account) => {
-  return new BigNumber(await yam.contracts.yam.methods.balanceOfUnderlying(account).call()).dividedBy(10**24)
+export const getDelegatedBalance = async (tsuki, account) => {
+  return new BigNumber(await tsuki.contracts.tsuki.methods.balanceOfUnderlying(account).call()).dividedBy(10**24)
 }
 
-export const migrate = async (yam, account) => {
-  return yam.contracts.yamV2migration.methods.migrate().send({ from: account, gas: 320000 })
+export const migrate = async (tsuki, account) => {
+  return tsuki.contracts.tsukiV2migration.methods.migrate().send({ from: account, gas: 320000 })
 }
 
-export const getMigrationEndTime = async (yam) => {
-  return yam.toBigN(await yam.contracts.yamV2migration.methods.startTime().call()).plus(yam.toBigN(86400*3)).toNumber()
+export const getMigrationEndTime = async (tsuki) => {
+  return tsuki.toBigN(await tsuki.contracts.tsukiV2migration.methods.startTime().call()).plus(tsuki.toBigN(86400*3)).toNumber()
 }
 
-export const getV2Supply = async (yam) => {
-  return new BigNumber(await yam.contracts.yamV2.methods.totalSupply().call())
+export const getV2Supply = async (tsuki) => {
+  return new BigNumber(await tsuki.contracts.tsukiV2.methods.totalSupply().call())
 }
 
-export const migrationStarted = async (yam) => {
+export const migrationStarted = async (tsuki) => {
   let now = new Date().getTime() / 1000; // get current time
-  let startTime = await yam.contracts.migrator.methods.startTime().call();
-  let token_initialized = await yam.contracts.migrator.methods.token_initialized().call();
-  let delegatorRewardsSet = await yam.contracts.migrator.methods.delegatorRewardsSet().call();
+  let startTime = await tsuki.contracts.migrator.methods.startTime().call();
+  let token_initialized = await tsuki.contracts.migrator.methods.token_initialized().call();
+  let delegatorRewardsSet = await tsuki.contracts.migrator.methods.delegatorRewardsSet().call();
   if (now >= startTime && token_initialized && delegatorRewardsSet) {
     return true;
   }
   return false;
 }
 
-export const currVested = async (yam, account) => {
+export const currVested = async (tsuki, account) => {
   let BASE = new BigNumber(10).pow(24);
 
-  let vested = new BigNumber(await yam.contracts.migrator.methods.vested(account).call()).dividedBy(BASE);
+  let vested = new BigNumber(await tsuki.contracts.migrator.methods.vested(account).call()).dividedBy(BASE);
   return vested;
 }
 
-export const currUnclaimedDelegatorRewards = async (yam, account) => {
+export const currUnclaimedDelegatorRewards = async (tsuki, account) => {
   let BASE = new BigNumber(10).pow(24);
 
   let start = new BigNumber(1600444800);
@@ -314,13 +268,13 @@ export const currUnclaimedDelegatorRewards = async (yam, account) => {
   if (percDone.gt(1)) {
     percDone = new BigNumber(1)
   }
-  let totalVesting = new BigNumber(await yam.contracts.migrator.methods.delegator_vesting(account).call());
-  let claimed = new BigNumber(await yam.contracts.migrator.methods.delegator_claimed(account).call());
+  let totalVesting = new BigNumber(await tsuki.contracts.migrator.methods.delegator_vesting(account).call());
+  let claimed = new BigNumber(await tsuki.contracts.migrator.methods.delegator_claimed(account).call());
   let unclaimed = ((totalVesting.multipliedBy(percDone)).minus(claimed)).dividedBy(BASE);
   return unclaimed;
 }
 
-export const currUnclaimedMigratorVesting = async (yam, account) => {
+export const currUnclaimedMigratorVesting = async (tsuki, account) => {
   let BASE = new BigNumber(10).pow(24);
 
   let start = new BigNumber(1600444800);
@@ -330,39 +284,39 @@ export const currUnclaimedMigratorVesting = async (yam, account) => {
   if (percDone.gt(1)) {
     percDone = new BigNumber(1)
   }
-  let totalVesting = new BigNumber(await yam.contracts.migrator.methods.vesting(account).call());
-  let claimed = new BigNumber(await yam.contracts.migrator.methods.claimed(account).call());
+  let totalVesting = new BigNumber(await tsuki.contracts.migrator.methods.vesting(account).call());
+  let claimed = new BigNumber(await tsuki.contracts.migrator.methods.claimed(account).call());
   let unclaimed = ((totalVesting.multipliedBy(percDone)).minus(claimed)).dividedBy(BASE);
   return unclaimed;
 }
 
-export const delegatorRewards = async (yam, account) => {
+export const delegatorRewards = async (tsuki, account) => {
   let BASE = new BigNumber(10).pow(24);
 
-  let rewards = new BigNumber(await yam.contracts.migrator.methods.delegator_vesting(account).call()).dividedBy(BASE);
+  let rewards = new BigNumber(await tsuki.contracts.migrator.methods.delegator_vesting(account).call()).dividedBy(BASE);
   return rewards;
 }
 
-export const migrateV3 = async (yam, account, onTxHash) => {
-    return await yam.contracts.migrator.methods.migrate()
-      .send({from: account, gas: 200000}, async (error, txHash) => {
-        if (error) {
-            onTxHash && onTxHash('')
-            console.log("Migration error", error)
-            return false
-        }
-        onTxHash && onTxHash(txHash)
-        const status = await waitTransaction(yam.web3.eth, txHash)
-        if (!status) {
-          console.log("Migration transaction failed.")
-          return false
-        }
-        return true
-      })
+export const migrateV3 = async (tsuki, account, onTxHash) => {
+  return await tsuki.contracts.migrator.methods.migrate()
+    .send({from: account, gas: 200000}, async (error, txHash) => {
+      if (error) {
+        onTxHash && onTxHash('')
+        console.log("Migration error", error)
+        return false
+      }
+      onTxHash && onTxHash(txHash)
+      const status = await waitTransaction(tsuki.web3.eth, txHash)
+      if (!status) {
+        console.log("Migration transaction failed.")
+        return false
+      }
+      return true
+    })
 }
 
-export const claimVested = async (yam, account, onTxHash) => {
-  return await yam.contracts.migrator.methods.claimVested().send({from: account, gas: 140000});
+export const claimVested = async (tsuki, account, onTxHash) => {
+  return await tsuki.contracts.migrator.methods.claimVested().send({from: account, gas: 140000});
 }
 
 const sleep = (ms) => {
@@ -377,5 +331,25 @@ export const waitTransaction = async (provider, txHash) => {
     txReceipt = r
     await sleep(2000)
   }
-  return (txReceipt.status)
+  return txReceipt.status
+}
+
+export const getMinRebaseTimeIntervalSec = async (tsuki) => {
+  if (tsuki) {
+    return new BigNumber(
+      await tsuki.contracts.policy.methods.minRebaseTimeIntervalSec().call()
+    )
+  }
+
+  return new BigNumber(0)
+}
+
+export const getLastRebaseTimestamp = async (tsuki) => {
+  if (tsuki) {
+    return new BigNumber(
+      await tsuki.contracts.policy.methods.lastRebaseTimestampSec().call()
+    )
+  }
+
+  return new BigNumber(0)
 }

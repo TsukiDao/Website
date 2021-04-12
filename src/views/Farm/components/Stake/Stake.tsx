@@ -164,17 +164,6 @@ const Stake: React.FC = () => {
     }
   }, [stakedBalance])
 
-  const renderer = (countdownProps: CountdownRenderProps) => {
-    const { hours, minutes, seconds } = countdownProps
-    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds
-    const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes
-    const paddedHours = hours < 10 ? `0${hours}` : hours
-    return (
-      <Box row justifyContent="center">
-        <Label text={`Farming starts in ${paddedHours}:${paddedMinutes}:${paddedSeconds}`} />
-      </Box>)
-  }
-
   return (
     <>
       <Card>
@@ -193,11 +182,6 @@ const Stake: React.FC = () => {
           {UnstakeButton}
           {StakeButton}
         </CardActions>
-        {typeof countdown !== 'undefined' && countdown > 0 && (
-          <CardActions>
-            <Countdown date={farmingStartTime} renderer={renderer} />
-          </CardActions>
-        )}
       </Card>
       <StakeModal
         isOpen={stakeModalIsOpen}
