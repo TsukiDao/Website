@@ -20,6 +20,7 @@ import FAQ from 'views/FAQ'
 import Home from 'views/Home'
 import { Farming0Provider } from 'contexts/Farming0'
 
+/** This is a description of the foo function. */
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
