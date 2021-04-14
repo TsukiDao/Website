@@ -353,3 +353,11 @@ export const getLastRebaseTimestamp = async (tsuki) => {
 
   return new BigNumber(0)
 }
+
+export const getInRebaseWindow = async (tsuki) => {
+  if(tsuki) {
+    return await tsuki.contracts.policy.methods.inRebaseWindow().call()
+  }
+
+  return false
+}
