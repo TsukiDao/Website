@@ -6,6 +6,8 @@ const useInRebaseWindow = () => {
   const [inRebaseWindow, setInRebaseWindow] = useState(false);
   const tsuki = useTsuki();
 
+  useEffect(() => {
+
   const fetchInRebaseWindow = async () => {
     if (!tsuki) {
       return false;
@@ -18,7 +20,6 @@ const useInRebaseWindow = () => {
     }
   };
 
-  useEffect(() => {
     fetchInRebaseWindow();
   }, [tsuki]);
 
