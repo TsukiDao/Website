@@ -4,6 +4,7 @@ import {
   Spacer,
   useTheme,
 } from 'react-neu'
+import Countdown from 'react-countdown';
 
 import Page from 'components/Page'
 import PageHeader from 'components/PageHeader'
@@ -18,6 +19,9 @@ import logo from './components/icon_2.png'
 const Home: React.FC = () => {
   const { darkMode } = useTheme()
   const { tsukiBalance } = useBalances()
+
+  const Completionist = () => <span>You are good to go!</span>;
+
   return (
     <Page>
       <PageHeader
@@ -31,6 +35,14 @@ const Home: React.FC = () => {
             <Spacer />
           </>
         )}
+        <Split>
+          <p style={{textAlign: 'center'}}>
+           <span>Rebase activates in:  </span>
+            <Countdown date={'2021-04-23T20:00:00.000+00:00'}>
+              <Completionist />
+            </Countdown>
+          </p>
+        </Split>
         <Split>
           <Rebase />
           <Stats />
