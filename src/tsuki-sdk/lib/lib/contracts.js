@@ -17,6 +17,13 @@ import TsukiBnbLpPoolJson from '../clean_build/contracts/tsukibnbPool.json'
 import BnbcBnbLpJson from '../clean_build/contracts/UniswapPair.json'
 import BnbcBnbLpPoolJson from '../clean_build/contracts/bnbcbnbPool.json'
 
+import TreatBnbLpJson from '../clean_build/contracts/UniswapPair.json'
+import TreatBnbLpPoolJson from '../clean_build/contracts/tsukibnbPool.json'
+import CakeJson from '../clean_build/contracts/cakeToken.json'
+import CakePoolJson from '../clean_build/contracts/tsukibnbPool.json'
+// import Community3LpJson from '../clean_build/contracts/UniswapPair.json'
+// import Community3LpPoolJson from '../clean_build/contracts/tsukibnbPool.json'
+
 import MigratorJson from "../clean_build/contracts/Migrator.json"
 
 export class Contracts {
@@ -52,6 +59,11 @@ export class Contracts {
     this.bnbcBnbLpPool = new this.web3.eth.Contract(BnbcBnbLpPoolJson)
     this.tsukiPool = new this.web3.eth.Contract(TsukiBnbLpPoolJson)
 
+    this.treatBnbLp = new this.web3.eth.Contract(TreatBnbLpJson.abi)
+    this.treatBnbLpPool = new this.web3.eth.Contract(TreatBnbLpPoolJson)
+    this.cake = new this.web3.eth.Contract(CakeJson)
+    this.cakePool = new this.web3.eth.Contract(CakePoolJson)
+
     this.migrator = new this.web3.eth.Contract(MigratorJson.abi);
 
     this.setProvider(provider, networkId);
@@ -74,6 +86,10 @@ export class Contracts {
     this.bnbcBnbLp.setProvider(provider);
     this.bnbcBnbLpPool.setProvider(provider);
     this.tsukiPool.setProvider(provider);
+    this.treatBnbLp.setProvider(provider);
+    this.treatBnbLpPool.setProvider(provider);
+    this.cake.setProvider(provider);
+    this.cakePool.setProvider(provider);
 
     const contracts = [
       { contract: this.migrator, json: MigratorJson },
@@ -98,6 +114,10 @@ export class Contracts {
     this.bnbcBnbLp.options.address = addressMap["BnbcBnbLp"]
     this.bnbcBnbLpPool.options.address = addressMap["BnbcBnbLpPool"]
     this.tsukiPool.options.address = addressMap["TsukiPool"]
+    this.treatBnbLp.options.address = addressMap["TsukiPool"]
+    this.treatBnbLpPool.options.address = addressMap["TsukiPool"]
+    this.cake.options.address = addressMap["TsukiPool"]
+    this.cakePool.options.address = addressMap["TsukiPool"]
     this.orchestrator.options.address = addressMap["Orchestrator"]
     this.oracle.options.address = addressMap["Oracle"]
     this.policy.options.address = addressMap["Policy"]
@@ -106,6 +126,8 @@ export class Contracts {
       { "tokenAddr": this.bnbc.options.address, "poolAddr": this.tsukiBnbLpPool.options.address},
       { "tokenAddr": this.bnbc.options.address, "poolAddr": this.bnbcBnbLpPool.options.address},
       { "tokenAddr": this.bnbc.options.address, "poolAddr": this.tsukiPool.options.address},
+      { "tokenAddr": this.bnbc.options.address, "poolAddr": this.treatBnbLpPool.options.address},
+      { "tokenAddr": this.bnbc.options.address, "poolAddr": this.cakePool.options.address},
     ]
   }
 
@@ -119,6 +141,10 @@ export class Contracts {
     this.bnbcBnbLp.options.from = account;
     this.bnbcBnbLpPool.options.from = account;
     this.tsukiPool.options.from = account;
+    this.treatBnbLp.options.from = account;
+    this.treatBnbLpPool.options.from = account;
+    this.cake.options.from = account;
+    this.cakePool.options.from = account;
   }
 
   async callContractFunction(

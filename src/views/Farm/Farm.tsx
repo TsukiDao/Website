@@ -15,11 +15,15 @@ import Split from "components/Split";
 import useFarming from "hooks/useFarming";
 
 import HarvestCard0 from "./components/HarvestPool0";
-import StakeCard0 from "./components/StakePool0";
 import HarvestCard from "./components/Harvest";
 import HarvestCard2 from "./components/HarvestPool2";
+import HarvestCard3 from "./components/HarvestPool3";
+import HarvestCard4 from "./components/HarvestPool4";
+import StakeCard0 from "./components/StakePool0";
 import StakeCard from "./components/Stake";
 import StakeCard2 from "./components/StakePool2";
+import StakeCard3 from "./components/StakePool3";
+import StakeCard4 from "./components/StakePool4";
 import logo from "./components/Harvest/Tsuki_Farm_small.png";
 import useFarming2 from "hooks/useFarming2";
 
@@ -87,6 +91,14 @@ const Farm: React.FC = () => {
         <Split>
           <StakeCard2 />
           <HarvestCard2 />
+        </Split>
+        <Split>
+          <StakeCard3 />
+          <HarvestCard3 />
+        </Split>
+        <Split>
+          <StakeCard4 />
+          <HarvestCard4 />
         </Split>
         <Spacer />
         <Separator />
