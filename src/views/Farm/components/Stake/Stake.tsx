@@ -22,6 +22,8 @@ import { bnToDec } from 'utils'
 import StakeModal from './components/StakeModal'
 import UnstakeModal from './components/UnstakeModal'
 
+import icon from './1TSUKI-BNB-60x60.png'
+
 const Stake: React.FC = () => {
   const [stakeModalIsOpen, setStakeModalIsOpen] = useState(false)
   const [unstakeModalIsOpen, setUnstakeModalIsOpen] = useState(false)
@@ -167,7 +169,7 @@ const Stake: React.FC = () => {
   return (
     <>
       <Card>
-        <CardIcon>🌙</CardIcon>
+        <CardIcon><img src={icon} /></CardIcon>
         <CardContent>
           <Box
             alignItems="center"
