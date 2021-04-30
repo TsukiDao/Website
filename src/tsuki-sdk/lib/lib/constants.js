@@ -46,4 +46,12 @@ export const addressMap = {
 
   Cake: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
   CakePool:  "0xc5FcE17394F196479A55C79dC708413bBbAcfE6b",
+
+  // legacy pools
+  TsukiBnbLpV1: "0x060425E600893F24847c6eb6aD3d1Cd6faecb1Bc",
+  TsukiBnbLpV1Pool: "0xf13fe11687b0639173e0489117b27f0a364bb4d1",
+
+  BnbcBnbLpV1: "0xa4B9963AD14DC02e081CC81b4f8fEd99CC90F0b1",
+  BnbcBnbLpV1Pool: "0x00cF1a1D8eDd861ce557Ee1Ff00C24d3bd52df37",
+
 }

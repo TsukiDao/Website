@@ -176,7 +176,7 @@ const Stake: React.FC = () => {
             column
           >
             <Value value={formattedStakedBalance} />
-            <Label text="Staked LP BNBC/BNB Tokens - 25x"/>
+            <Label text="Staked LP BNBC/BNB Tokens - 6.5x"/>
             <a target ="_blank" href='https://exchange.pancakeswap.finance/#/add/0x31B5d91806AF3364678715f4C5Bf50c1e3bAE10A/ETH'>Get LP tokens </a>
           </Box>
         </CardContent>
