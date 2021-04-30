@@ -37,7 +37,6 @@ const Rebase: React.FC = () => {
 
   const rebasePercentage = tsuki ? 100 - (nextRebaseInterval / minRebaseTimeIntervalSec) * 100 : 0
   const inRebaseWindow = useInRebaseWindow()
-  console.log({rebasePercentage: rebasePercentage, inRebaseWindow: inRebaseWindow})
   return (
     <Card>
       <CardContent>
