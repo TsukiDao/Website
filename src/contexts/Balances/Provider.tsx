@@ -8,6 +8,8 @@ import {
   bnbc as bnbcAddress,
   bnbcbnbCakeLP as bnbcBnbCakeLpAddress,
   tsukibnbCakeLP as tsukiBnbCakeLpAddress,
+  treatBnbLp as treatBnbLpAddress,
+  cake as cakeAddress,
   bnbcbnbCakeLPV1 as bnbcBnbCakeLpV1Address,
   tsukibnbCakeLPV1 as tsukiBnbCakeLpV1Address,
 } from 'constants/tokenAddresses'
@@ -20,6 +22,8 @@ const Provider: React.FC = ({ children }) => {
   const [bnbcBalance, setBnbcBalance] = useState<BigNumber>()
   const [tsukiBnbLpBalance, setTsukiBnbLpBalance] = useState<BigNumber>()
   const [bnbcBnbLpBalance, setBnbcBnbLpBalance] = useState<BigNumber>()
+  const [treatBnbLpBalance, setTreatBnbLpBalance] = useState<BigNumber>()
+  const [cakeBalance, setCakeBalance] = useState<BigNumber>()
 
   const [tsukiBnbLpV1Balance, setTsukiBnbLpV1Balance] = useState<BigNumber>()
   const [bnbcBnbLpV1Balance, setBnbcBnbLpV1Balance] = useState<BigNumber>()
@@ -33,6 +37,9 @@ const Provider: React.FC = ({ children }) => {
       await getBalance(provider, tsukiBnbCakeLpAddress, userAddress),
       await getBalance(provider, bnbcBnbCakeLpAddress, userAddress),
 
+      await getBalance(provider, treatBnbLpAddress, userAddress),
+      await getBalance(provider, cakeAddress, userAddress),
+
       await getBalance(provider, tsukiBnbCakeLpV1Address, userAddress),
       await getBalance(provider, bnbcBnbCakeLpV1Address, userAddress),
     ])
@@ -41,8 +48,11 @@ const Provider: React.FC = ({ children }) => {
     setTsukiBnbLpBalance(new BigNumber(balances[2]).dividedBy(new BigNumber(10).pow(18)))
     setBnbcBnbLpBalance(new BigNumber(balances[3]).dividedBy(new BigNumber(10).pow(18)))
 
-    setTsukiBnbLpV1Balance(new BigNumber(balances[4]).dividedBy(new BigNumber(10).pow(18)))
-    setBnbcBnbLpV1Balance(new BigNumber(balances[5]).dividedBy(new BigNumber(10).pow(18)))
+    setTreatBnbLpBalance(new BigNumber(balances[4]).dividedBy(new BigNumber(10).pow(18)))
+    setCakeBalance(new BigNumber(balances[5]).dividedBy(new BigNumber(10).pow(18)))
+
+    setTsukiBnbLpV1Balance(new BigNumber(balances[6]).dividedBy(new BigNumber(10).pow(18)))
+    setBnbcBnbLpV1Balance(new BigNumber(balances[7]).dividedBy(new BigNumber(10).pow(18)))
   }, [
     setTsukiBalance,
     setBnbcBalance,
@@ -80,6 +90,9 @@ const Provider: React.FC = ({ children }) => {
       bnbcBalance,
       tsukiBnbLpBalance,
       bnbcBnbLpBalance,
+
+      treatBnbLpBalance,
+      cakeBalance,
 
       tsukiBnbLpV1Balance,
       bnbcBnbLpV1Balance,

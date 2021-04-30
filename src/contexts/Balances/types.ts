@@ -6,6 +6,9 @@ export interface ContextValues {
   tsukiBnbLpBalance?: BigNumber,
   bnbcBnbLpBalance?: BigNumber,
 
+  treatBnbLpBalance?: BigNumber,
+  cakeBalance?: BigNumber,
+
   tsukiBnbLpV1Balance?: BigNumber,
   bnbcBnbLpV1Balance?: BigNumber,
 }
