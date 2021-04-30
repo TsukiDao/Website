@@ -12,7 +12,7 @@ import {
 
 import TokenInput from 'components/TokenInput'
 
-import useFarming from 'hooks/useFarming'
+import useFarming3 from 'hooks/useFarming3'
 import { getFullDisplayBalance } from 'utils'
 
 interface UnstakeModalProps extends ModalProps {
@@ -26,7 +26,7 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({
 }) => {
 
   const [val, setVal] = useState('')
-  const { stakedBalance } = useFarming()
+  const { stakedBalance } = useFarming3()
 
   const fullBalance = useMemo(() => {
     return getFullDisplayBalance(stakedBalance || new BigNumber(0))

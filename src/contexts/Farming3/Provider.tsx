@@ -34,18 +34,18 @@ const Provider: React.FC = ({ children }) => {
   const tsuki = useTsuki()
   const { account } = useWallet()
   
-  const  bnbcBnbLpPoolAddress = tsuki ? tsuki.contracts.bnbcBnbLpPool.options.address : ''
-  const bnbcBnbLpAddress = tsuki ? tsuki.contracts.bnbcBnbLp.options.address : ''
+  const  treatBnbLpPoolAddress = tsuki ? tsuki.contracts.treatBnbLpPool.options.address : ''
+  const treatBnbLpAddress = tsuki ? tsuki.contracts.treatBnbLp.options.address : ''
 
   const { isApproved, isApproving, onApprove } = useApproval(
-    bnbcBnbLpAddress,
-    bnbcBnbLpPoolAddress,
+    treatBnbLpAddress,
+    treatBnbLpPoolAddress,
     () => setConfirmTxModalIsOpen(false)
   )
 
   const fetchEarnedBalance = useCallback(async () => {
     if (!account || !tsuki) return
-    const balance = await getEarned(tsuki, tsuki.contracts.bnbcBnbLpPool, account)
+    const balance = await getEarned(tsuki, tsuki.contracts.treatBnbLpPool, account)
     setEarnedBalance(balance)
   }, [
     account,
@@ -56,7 +56,7 @@ const Provider: React.FC = ({ children }) => {
   const fetchStakedBalance = useCallback(async () => {
     if (!account || !tsuki) return
 
-    const balance = await getStaked(tsuki, tsuki.contracts.bnbcBnbLpPool, account)
+    const balance = await getStaked(tsuki, tsuki.contracts.treatBnbLpPool, account)
     setStakedBalance(balance)
   }, [
     account,
@@ -83,7 +83,7 @@ const Provider: React.FC = ({ children }) => {
   const handleHarvest = useCallback(async () => {
     if (!tsuki) return
     setConfirmTxModalIsOpen(true)
-    await harvest(tsuki, 'bnbcBnbLp', account, () => {
+    await harvest(tsuki, 'treatBnbLp', account, () => {
       setConfirmTxModalIsOpen(false)
       setIsHarvesting(true)
     })
@@ -98,7 +98,7 @@ const Provider: React.FC = ({ children }) => {
   const handleRedeem = useCallback(async () => {
     if (!tsuki) return
     setConfirmTxModalIsOpen(true)
-    await redeem(tsuki, 'bnbcBnbLp', account, () => {
+    await redeem(tsuki, 'treatBnbLp', account, () => {
       setConfirmTxModalIsOpen(false)
       setIsRedeeming(true)
     })
@@ -113,7 +113,7 @@ const Provider: React.FC = ({ children }) => {
   const handleStake = useCallback(async (amount: string) => {
     if (!tsuki) return
     setConfirmTxModalIsOpen(true)
-    await stake(tsuki, 'bnbcBnbLp', amount, account, () => {
+    await stake(tsuki, 'treatBnbLp', amount, account, () => {
       setConfirmTxModalIsOpen(false)
       setIsStaking(true)
     })
@@ -128,7 +128,7 @@ const Provider: React.FC = ({ children }) => {
   const handleUnstake = useCallback(async (amount: string) => {
     if (!tsuki) return
     setConfirmTxModalIsOpen(true)
-    await unstake(tsuki, 'bnbcBnbLp', amount, account, () => {
+    await unstake(tsuki, 'treatBnbLp', amount, account, () => {
       setConfirmTxModalIsOpen(false)
       setIsUnstaking(true)
     })

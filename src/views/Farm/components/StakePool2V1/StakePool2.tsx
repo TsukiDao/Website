@@ -15,7 +15,7 @@ import { useWallet } from 'use-wallet'
 import Label from 'components/Label'
 import Value from 'components/Value'
 
-import useFarming2 from 'hooks/useFarming2'
+import useFarming2V1 from 'hooks/useFarming2V1'
 
 import { bnToDec } from 'utils'
 
@@ -40,7 +40,7 @@ const Stake: React.FC = () => {
     onStake,
     onUnstake,
     stakedBalance,
-  } = useFarming2()
+  } = useFarming2V1()
 
   const handleDismissStakeModal = useCallback(() => {
     setStakeModalIsOpen(false)

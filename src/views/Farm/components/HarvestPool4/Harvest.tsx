@@ -13,7 +13,7 @@ import { useWallet } from 'use-wallet'
 import Label from 'components/Label'
 import Value from 'components/Value'
 
-import useFarming from 'hooks/useFarming'
+import useFarming4 from 'hooks/useFarming4'
 
 import { bnToDec } from 'utils'
 
@@ -23,7 +23,7 @@ const Harvest: React.FC = () => {
     isHarvesting,
     isRedeeming,
     onHarvest,
-  } = useFarming()
+  } = useFarming4()
 
   const { status } = useWallet()
 

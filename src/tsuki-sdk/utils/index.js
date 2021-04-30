@@ -29,11 +29,17 @@ const getPool = (tsuki, poolName) => {
     case 'bnbcBnbLp':
       return tsuki.contracts.bnbcBnbLpPool
 
-    case 'treatLp':
+    case 'treatBnbLp':
       return tsuki.contracts.treatBnbLpPool
 
     case 'cake':
       return tsuki.contracts.cakePool
+
+    case 'tsukiBnbLpV1':
+      return tsuki.contract.tsukiBnbLpV1Pool
+
+    case 'bnbcBnbLpV1':
+      return tsuki.contract.bnbcBnbLpV1Pool
 
     case null:
     case undefined:
@@ -55,6 +61,7 @@ export const stake = async (tsuki, pool, amount, account, onTxHash) => {
 
   let now = new Date().getTime() / 1000;
   // const gas = GAS_LIMIT.STAKING[tokenName.toUpperCase()] || GAS_LIMIT.STAKING.DEFAULT;
+  console.log({poolContract})
   const gas = GAS_LIMIT.STAKING.DEFAULT
   if (now >= 1597172400) {
     return poolContract.methods
