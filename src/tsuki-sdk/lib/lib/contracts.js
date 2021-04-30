@@ -59,6 +59,12 @@ export class Contracts {
     this.bnbcBnbLpPool = new this.web3.eth.Contract(BnbcBnbLpPoolJson)
     this.tsukiPool = new this.web3.eth.Contract(TsukiBnbLpPoolJson)
 
+    // legacy V1 pools
+    this.tsukiBnbLpV1 = new this.web3.eth.Contract(TsukiBnbLpJson.abi)
+    this.tsukiBnbLpV1Pool = new this.web3.eth.Contract(TsukiBnbLpPoolJson)
+    this.bnbcBnbLpV1 = new this.web3.eth.Contract(BnbcBnbLpJson.abi)
+    this.bnbcBnbLpV1Pool = new this.web3.eth.Contract(BnbcBnbLpPoolJson)
+
     this.treatBnbLp = new this.web3.eth.Contract(TreatBnbLpJson.abi)
     this.treatBnbLpPool = new this.web3.eth.Contract(TreatBnbLpPoolJson)
     this.cake = new this.web3.eth.Contract(CakeJson)
@@ -91,6 +97,12 @@ export class Contracts {
     this.cake.setProvider(provider);
     this.cakePool.setProvider(provider);
 
+    // legacy V1 pools
+    this.tsukiBnbLpV1.setProvider(provider);
+    this.tsukiBnbLpV1Pool.setProvider(provider);
+    this.bnbcBnbLpV1.setProvider(provider);
+    this.bnbcBnbLpV1Pool.setProvider(provider);
+
     const contracts = [
       { contract: this.migrator, json: MigratorJson },
     ]
@@ -121,6 +133,12 @@ export class Contracts {
     this.orchestrator.options.address = addressMap["Orchestrator"]
     this.oracle.options.address = addressMap["Oracle"]
     this.policy.options.address = addressMap["Policy"]
+
+    // legacy V1 pools
+    this.tsukiBnbLpV1.options.address = addressMap["TsukiBnbLpV1"]
+    this.tsukiBnbLpV1Pool.options.address = addressMap["TsukiBnbLpV1Pool"]
+    this.bnbcBnbLpV1.options.address = addressMap["BnbcBnbLpV1"]
+    this.bnbcBnbLpV1Pool.options.address = addressMap["BnbcBnbLpV1Pool"]
 
     this.pools = [
       { "tokenAddr": this.bnbc.options.address, "poolAddr": this.tsukiBnbLpPool.options.address},

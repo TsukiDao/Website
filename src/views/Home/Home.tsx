@@ -38,7 +38,7 @@ const Home: React.FC = () => {
         <Split>
           <p style={{textAlign: 'center'}}>
            <span>Rebase activates in:  </span>
-            <Countdown date={'2021-04-23T20:00:00.000+00:00'}>
+            <Countdown date={'2021-05-07T16:00:00.000+00:00'}>
               <Completionist />
             </Countdown>
           </p>
