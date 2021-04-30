@@ -18,8 +18,36 @@ export const getPoolStartTime = async (poolContract) => {
   return await poolContract.methods.starttime().call()
 }
 
+const getPool = (tsuki, poolName) => {
+  switch(poolName) {
+    case 'tsuki':
+      return tsuki.contracts.tsukiPool
+
+    case 'tsukiBnbLp':
+      return tsuki.contracts.tsukiBnbLpPool
+
+    case 'bnbcBnbLp':
+      return tsuki.contracts.bnbcBnbLpPool
+
+    case 'treatLp':
+      return tsuki.contracts.treatBnbLpPool
+
+    case 'cake':
+      return tsuki.contracts.cakePool
+
+    case null:
+    case undefined:
+    case '':
+      return null
+
+    default:
+      console.error('unknown pool name', poolName)
+      return null
+  }
+}
+
 export const stake = async (tsuki, pool, amount, account, onTxHash) => {
-  const poolContract = pool === 'tsuki' ? tsuki.contracts.tsukiPool : pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  const poolContract = getPool(tsuki, pool)
   if(poolContract === null) {
     console.warn('pool not found:', pool)
     return false
@@ -51,7 +79,7 @@ export const stake = async (tsuki, pool, amount, account, onTxHash) => {
 }
 
 export const unstake = async (tsuki, pool, amount, account, onTxHash) => {
-  const poolContract = pool === 'tsuki' ? tsuki.contracts.tsukiPool : pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  const poolContract = getPool(tsuki, pool)
   if(poolContract === null) {
     console.warn('pool not found:', pool)
     return false
@@ -81,7 +109,7 @@ export const unstake = async (tsuki, pool, amount, account, onTxHash) => {
 }
 
 export const harvest = async (tsuki, pool, account, onTxHash) => {
-  const poolContract = pool === 'tsuki' ? tsuki.contracts.tsukiPool : pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  const poolContract = getPool(tsuki, pool)
   if(poolContract === null) {
     console.warn('pool not found:', pool)
     return false
@@ -111,7 +139,7 @@ export const harvest = async (tsuki, pool, account, onTxHash) => {
 }
 
 export const redeem = async (tsuki, pool, account, onTxHash) => {
-  const poolContract = pool === 'tsuki' ? tsuki.contracts.tsukiPool : pool === 'tsukiBnbLp' ? tsuki.contracts.tsukiBnbLpPool : pool === 'bnbcBnbLp' ? tsuki.contracts.bnbcBnbLpPool : null
+  const poolContract = getPool(tsuki, pool)
   if(poolContract === null) {
     console.warn('pool not found:', pool)
     return false
@@ -352,4 +380,12 @@ export const getLastRebaseTimestamp = async (tsuki) => {
   }
 
   return new BigNumber(0)
+}
+
+export const getInRebaseWindow = async (tsuki) => {
+  if(tsuki) {
+    return await tsuki.contracts.policy.methods.inRebaseWindow().call()
+  }
+
+  return false
 }

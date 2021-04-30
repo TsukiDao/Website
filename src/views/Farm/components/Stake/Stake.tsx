@@ -22,6 +22,8 @@ import { bnToDec } from 'utils'
 import StakeModal from './components/StakeModal'
 import UnstakeModal from './components/UnstakeModal'
 
+import icon from './1TSUKI-BNB-60x60.png'
+
 const Stake: React.FC = () => {
   const [stakeModalIsOpen, setStakeModalIsOpen] = useState(false)
   const [unstakeModalIsOpen, setUnstakeModalIsOpen] = useState(false)
@@ -167,14 +169,14 @@ const Stake: React.FC = () => {
   return (
     <>
       <Card>
-        <CardIcon>🌙</CardIcon>
+        <CardIcon><img src={icon} /></CardIcon>
         <CardContent>
           <Box
             alignItems="center"
             column
           >
             <Value value={formattedStakedBalance} />
-            <Label text="Staked LP TSUKI/BNB Tokens - 24x" />
+            <Label text="Staked LP TSUKI/BNB Tokens - 25x" />
             <a target ="_blank" href='https://exchange.pancakeswap.finance/#/add/0x3fd9e7041c45622e8026199a46f763c9807f66f3/ETH'>Get LP tokens </a>
           </Box>
         </CardContent>

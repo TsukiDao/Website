@@ -7,7 +7,9 @@ import {
   tsuki as tsukiAddress,
   bnbc as bnbcAddress,
   bnbcbnbCakeLP as bnbcBnbCakeLpAddress,
-  tsukibnbCakeLP as tsukiBnbCakeLpAddress
+  tsukibnbCakeLP as tsukiBnbCakeLpAddress,
+  bnbcbnbCakeLPV1 as bnbcBnbCakeLpV1Address,
+  tsukibnbCakeLPV1 as tsukiBnbCakeLpV1Address,
 } from 'constants/tokenAddresses'
 import { getBalance } from 'utils'
 
@@ -19,6 +21,9 @@ const Provider: React.FC = ({ children }) => {
   const [tsukiBnbLpBalance, setTsukiBnbLpBalance] = useState<BigNumber>()
   const [bnbcBnbLpBalance, setBnbcBnbLpBalance] = useState<BigNumber>()
 
+  const [tsukiBnbLpV1Balance, setTsukiBnbLpV1Balance] = useState<BigNumber>()
+  const [bnbcBnbLpV1Balance, setBnbcBnbLpV1Balance] = useState<BigNumber>()
+
   const { account, ethereum }: { account: string | null, ethereum: provider } = useWallet()
 
   const fetchBalances = useCallback(async (userAddress: string, provider: provider) => {
@@ -27,16 +32,24 @@ const Provider: React.FC = ({ children }) => {
       await getBalance(provider, bnbcAddress, userAddress),
       await getBalance(provider, tsukiBnbCakeLpAddress, userAddress),
       await getBalance(provider, bnbcBnbCakeLpAddress, userAddress),
+
+      await getBalance(provider, tsukiBnbCakeLpV1Address, userAddress),
+      await getBalance(provider, bnbcBnbCakeLpV1Address, userAddress),
     ])
     setTsukiBalance(new BigNumber(balances[0]).dividedBy(new BigNumber(10).pow(18)))
     setBnbcBalance(new BigNumber(balances[1]).dividedBy(new BigNumber(10).pow(18)))
     setTsukiBnbLpBalance(new BigNumber(balances[2]).dividedBy(new BigNumber(10).pow(18)))
     setBnbcBnbLpBalance(new BigNumber(balances[3]).dividedBy(new BigNumber(10).pow(18)))
+
+    setTsukiBnbLpV1Balance(new BigNumber(balances[4]).dividedBy(new BigNumber(10).pow(18)))
+    setBnbcBnbLpV1Balance(new BigNumber(balances[5]).dividedBy(new BigNumber(10).pow(18)))
   }, [
     setTsukiBalance,
     setBnbcBalance,
     setTsukiBnbLpBalance,
-    setBnbcBnbLpBalance
+    setBnbcBnbLpBalance,
+    setTsukiBnbLpV1Balance,
+    setBnbcBnbLpV1Balance,
   ])
 
   useEffect(() => {
@@ -66,7 +79,10 @@ const Provider: React.FC = ({ children }) => {
       tsukiBalance,
       bnbcBalance,
       tsukiBnbLpBalance,
-      bnbcBnbLpBalance
+      bnbcBnbLpBalance,
+
+      tsukiBnbLpV1Balance,
+      bnbcBnbLpV1Balance,
     }}>
       {children}
     </Context.Provider>
