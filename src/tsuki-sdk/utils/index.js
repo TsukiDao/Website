@@ -36,10 +36,10 @@ const getPool = (tsuki, poolName) => {
       return tsuki.contracts.cakePool
 
     case 'tsukiBnbLpV1':
-      return tsuki.contract.tsukiBnbLpV1Pool
+      return tsuki.contracts.tsukiBnbLpV1Pool
 
     case 'bnbcBnbLpV1':
-      return tsuki.contract.bnbcBnbLpV1Pool
+      return tsuki.contracts.bnbcBnbLpV1Pool
 
     case null:
     case undefined:
