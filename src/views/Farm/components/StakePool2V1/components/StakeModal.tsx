@@ -25,11 +25,11 @@ const StakeModal: React.FC<StakeModalProps> = ({
 }) => {
 
   const [val, setVal] = useState('')
-  const { bnbcBnbLpBalance } = useBalances()
+  const { bnbcBnbLpV1Balance } = useBalances()
 
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(bnbcBnbLpBalance || new BigNumber(0), 0)
-  }, [bnbcBnbLpBalance])
+    return getFullDisplayBalance(bnbcBnbLpV1Balance || new BigNumber(0), 0)
+  }, [bnbcBnbLpV1Balance])
 
   const handleChange = useCallback((e: React.FormEvent<HTMLInputElement>) => {
     setVal(e.currentTarget.value)
