@@ -21,7 +21,7 @@ import { bnToDec } from 'utils'
 
 import StakeModal from './components/StakeModal'
 import UnstakeModal from './components/UnstakeModal'
-import icon from './icon.png'
+import icon from './TSUKI-WEBSITE-TOP-LEFT-AND-FARM-60X60.png'
 
 const Stake: React.FC = () => {
   const [stakeModalIsOpen, setStakeModalIsOpen] = useState(false)
