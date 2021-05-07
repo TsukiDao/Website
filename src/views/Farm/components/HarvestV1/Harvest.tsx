@@ -16,6 +16,7 @@ import Value from 'components/Value'
 import useFarmingV1 from 'hooks/useFarmingV1'
 
 import { bnToDec } from 'utils'
+import BnbcLogo from '../assets/BNBC-WEBSITE-FARM-60X60.png'
 
 const Harvest: React.FC = () => {
   const {
@@ -72,7 +73,7 @@ const Harvest: React.FC = () => {
 
   return (
     <Card>
-      <CardIcon>🌕</CardIcon>
+      <CardIcon><img src={BnbcLogo} alt='bnbc logo' /></CardIcon>
       <CardContent>
         <Box
           alignItems="center"
