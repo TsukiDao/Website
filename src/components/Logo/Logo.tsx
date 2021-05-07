@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import logo from './icon_3.png'
+import logo from './TSUKI-WEBSITE-TOP-LEFT-AND-FARM-60X60.png'
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">

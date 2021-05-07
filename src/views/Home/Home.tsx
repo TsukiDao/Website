@@ -14,7 +14,7 @@ import useBalances from 'hooks/useBalances'
 
 import Rebase from './components/Rebase'
 import Stats from './components/Stats'
-import logo from './components/icon_2.png'
+import logo from '../../components/Logo/TSUKI-WEBSITE-CENTER-100X100.png'
 
 const Home: React.FC = () => {
   const { darkMode } = useTheme()
